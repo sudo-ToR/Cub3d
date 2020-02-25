@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_window.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 15:29:31 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/01/26 16:55:07 by lnoirot          ###   ########.fr       */
+/*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
+/*   Updated: 2020/02/23 20:28:45 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
-int	main()
+int			check_argument(char *name_file)
 {
-	create_application(create_vector2(840, 680), "Yolo gros code (c)");
+	int length;
 
-	clear_screen();
+	if ((length = ft_strlen(name_file)) < 4)
+		return (1);
+	if (ft_strncmp(name_file + (length - 4), ".cub", 4))
+		return (1);
+	return (0);
+}
 
-	draw_rectangle(create_vector2(50, 50), create_vector2(150, 150), create_color(255, 0, 0, 255));
-	draw_rectangle(create_vector2(75, 150), create_vector2(150, 50), create_color(0, 0, 255, 255));
+int			main(int ac, char **av)
+{
+	int		fd;
+	t_mlx	m;
 
-	render_screen();
-
-	return (run_application());
+	if (ac == 1)
+		return (ft_printf("Missing argument\n"));
+	if (check_argument(av[1]))
+		return (ft_printf(("First argument must be a .cub file\n")));
+	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p))
+	{
+	//	system("leaks Cub3D");
+		return (1);
+	}
+	if (ac >= 3 && !ft_strcmp(av[2], "--save"))
+		return (ft_printf("save option\n"));
+	else
+		ft_init_mlx(m);
+	return (0);
 }

@@ -1,78 +1,57 @@
-NAME = cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
+#    Updated: 2020/02/23 20:12:25 by lnoirot          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = gcc
+.SUFFIXES:
 
-## --- Description des dossiers du projet ---
-# la liste de tout les dossiers ou on peut trouver un .c
-SRC_DIR = $(shell find srcs -type d)
+NAME	=	Cub3D 
+CC		= 	gcc -lmlx -framework OpenGL -framework AppKit
+CFLAGS	= 	-g3 $(INCLUDES)
 
-# la liste de tout les dossiers ou on peut trouver un .h
-INC_DIR = $(shell find includes -type d)
+LIBFT_PATH = ./Libft
+LIBFT_MAKE = @$(MAKE) -C $(LIBFT_PATH)
+LIBFT_INC = -I $(LIBFT_PATH)
+LIBFT_LIB = -L$(LIBFT_PATH) -lft
+FT_PRINTF_LIB = -L$(LIBFT_PATH)/ft_printf -lftprintf
+INCLUDES =  $(LIBFT_INC) -I$(LIBFT_PATH) -I./includes
 
-# la liste de tout les dossiers ou on peut trouver un .o
-OBJ_DIR = obj
+SRCS_PATH = ./srcs
+SRCS	=	$(SRCS_PATH)/main.c \
+			$(SRCS_PATH)/parsing.c \
+			$(SRCS_PATH)/parsing_utils.c \
+			$(SRCS_PATH)/check_parsing.c \
+			$(SRCS_PATH)/mlx_init.c \
+			$(SRCS_PATH)/images.c
+OBJS	=	$(SRCS:.c=.o)
 
-# la liste de tout les dossiers ou on peut trouver un .a
-LIB_DIR = $(shell find lib -type d)
 
+all :		libft
+			@$(MAKE) $(NAME)
 
-## --- Definition des Vpath
-vpath %.c $(foreach dir, $(SRC_DIR), $(dir): )
+$(NAME):	$(OBJS)
+			$(CC) $(OBJS) $(LIBFT_LIB)  $(FT_PRINTF_LIB) -o $(NAME)
 
+libft:
+			$(LIBFT_MAKE)
 
-## --- Definition des objets
-# la liste des .c a compiler pour notre projet
-SRC = main.c t_application.c t_application_handle_screen.c t_application_run.c t_color.c t_vector.c draw_primitive.c
+%.o:		%.c
+			$(CC) $(CFLAGS) -c $< -o $@
 
-# la liste des .o a utiliser pour notre projet
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
+clean :
+	rm -f $(OBJS)
 
-## --- Definition des librairies de dependance
-LIB = mlx ft
+fclean : clean
+	$(LIBFT_MAKE) fclean
+	rm -f $(NAME)
 
-## -- Definition des flags de compilation/includes/linkage
-# les flags de compilation
-CFLAGS = -Wall -Wextra -Werror
+re : 		fclean all	
 
-# les flags d'includes
-IFLAGS = $(foreach dir, $(INC_DIR),-I $(dir) )
-
-# les flags de librarie (les flags de linkage)
-LFLAGS = $(foreach dir, $(LIB_DIR),-L $(dir) ) $(foreach lib, $(LIB),-l $(lib) ) -framework AppKit -framework OpenGL
-
-all :
-	make $(NAME)
-
-$(OBJ_DIR)/%.o : %.c
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
-
-$(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ) -o $(NAME)
-
-clean:
-	rm -rf $(OBJ_DIR)
-
-fclean:
-	make clean
-	rm -rf $(NAME)
-
-re:
-	make fclean
-	make $(NAME)
-
-## regle pour compiler les differentes libraries dans lib
-install :
-	@make -C lib/libft
-	@make -C lib/mlx
-
-re-install :
-	@make -C lib/libft re
-	@make -C lib/mlx re
-
-show:
-	@echo "SRCS :\n$(SRC)\n"
-	@echo "OBJS :\n$(OBJ)\n"
-	@echo "CFLAGS :\n$(CFLAGS)\n"
-	@echo "IFLAGS :\n$(IFLAGS)\n"
-	@echo "LFLAGS :\n$(LFLAGS)\n"
+.PHONY:		all clean fclean re libft
