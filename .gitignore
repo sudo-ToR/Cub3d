@@ -1,3 +1,5 @@
-*.o
-*.a
+**.o
+**.a
+.vscode
+**.swp
 Cub3d
