@@ -1,5 +1,6 @@
 **.o
 **.a
-.vscode
+**/.vscode
 **.swp
 Cub3d
+.DS_Store

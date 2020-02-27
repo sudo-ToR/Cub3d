@@ -6,7 +6,7 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/02/23 20:12:25 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/02/27 11:45:14 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRCS	=	$(SRCS_PATH)/main.c \
 			$(SRCS_PATH)/parsing_utils.c \
 			$(SRCS_PATH)/check_parsing.c \
 			$(SRCS_PATH)/mlx_init.c \
-			$(SRCS_PATH)/images.c
+			$(SRCS_PATH)/images.c \
+			$(SRCS_PATH)/initial_pos.c \
+			$(SRCS_PATH)/minimap.c
 OBJS	=	$(SRCS:.c=.o)
 
 
