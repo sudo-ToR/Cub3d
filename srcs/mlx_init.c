@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 20:16:06 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 22:39:52 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,33 @@ int		key_press(int keycode, void *param)
 	if (keycode == 13 || keycode == 126)
 	{
 		new_coord.y = (m->cam_angle > 0 && m->cam_angle < M_PI) ? m->pl.y + 0.5 : m->pl.y - 0.5;
-		new_coord.x = (m->cam_angle == M_PI_2 || m->cam_angle == 3 * M_PI_2) ? m->pl.x: new_coord.y / coeff;
-		m->pl.y -= (m->pl.y > 1.5 && m->p.map[(int)(m->pl.y - 0.5)][(int)(m->pl.x)] == '0') ? 0.5 : 0;
+		new_coord.x = (m->cam_angle == M_PI_2 || m->cam_angle == 3 * M_PI_2) ? m->pl.x: m->pl.x - 0.5 / coeff;
+		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
+		{
+			m->pl.x = new_coord.x;
+			m->pl.y = new_coord.y;
+		}
 	}
 	if (keycode == 1 || keycode == 125)
 	{
-		m->pl.y += (m->pl.y < m->p.height - 1.5 && m->p.map[(int)(m->pl.y + 0.5)][(int)(m->pl.x)] == '0') ? 0.5 : 0; 
+		new_coord.y = (m->cam_angle > 0 && m->cam_angle < M_PI) ? m->pl.y - 0.5 : m->pl.y + 0.5;
+		new_coord.x = (m->cam_angle == M_PI_2 || m->cam_angle == 3 * M_PI_2) ? m->pl.x : m->pl.x + 0.5 / coeff;
+		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
+		{
+			m->pl.x = new_coord.x;
+			m->pl.y = new_coord.y;
+		}
 	}
 	if (keycode == 0)
 	{
-		m->pl.x -= (m->pl.x < m->p.width + 1.5 && m->p.map[(int)(m->pl.y)][(int)(m->pl.x - 1)] == '0') ? 0.5 : 0; 
+		new_coord.x = ((m->cam_angle > 0 && m->cam_angle < M_PI_2) 
+			|| (m->cam_angle > 3. * M_PI_2  && m->cam_angle < 2. * M_PI_2)) ? m->pl.x + 0.5 : m->pl.x - 0.5;
+		new_coord.y = (m->cam_angle == 0 || m->cam_angle == M_PI) ? m->pl.y : m->pl.x + 0.5 * coeff;
+		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
+		{
+			m->pl.x = new_coord.x;
+			m->pl.y = new_coord.y;
+		}
 	}
 	if (keycode == 2)
 	{

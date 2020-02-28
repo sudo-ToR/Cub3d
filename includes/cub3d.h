@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 19:22:11 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 20:40:00 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include <mlx.h>
 # include <math.h>
 # include "parsing.h"
-# include "move.h"
 
-
+# define X11_KEY_PRESS          2
+# define X11_KEY_PRESS_M        1
+# define X11_KEY_RELEASE        3
+# define X11_KEY_RELEASE_M      2
 
 
 typedef struct		s_img
