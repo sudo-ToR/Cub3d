@@ -6,7 +6,7 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/02/28 16:33:40 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/02/28 19:56:49 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,23 +17,25 @@ CC		= 	gcc -lmlx -framework OpenGL -framework AppKit
 CFLAGS	= 	-g3 $(INCLUDES)
 
 LIBFT_PATH = ./Libft
+OBJ_PATH =	./obj/
 LIBFT_MAKE = @$(MAKE) -C $(LIBFT_PATH)
 LIBFT_INC = -I $(LIBFT_PATH)
 LIBFT_LIB = -L$(LIBFT_PATH) -lft
 FT_PRINTF_LIB = -L$(LIBFT_PATH)/ft_printf -lftprintf
 INCLUDES =  $(LIBFT_INC) -I$(LIBFT_PATH) -I./includes
 
-SRCS_PATH = ./srcs
-SRCS	=	$(SRCS_PATH)/main.c \
-			$(SRCS_PATH)/parsing.c \
-			$(SRCS_PATH)/parsing_utils.c \
-			$(SRCS_PATH)/check_parsing.c \
-			$(SRCS_PATH)/mlx_init.c \
-			$(SRCS_PATH)/images.c \
-			$(SRCS_PATH)/initial_param.c \
-			$(SRCS_PATH)/minimap.c \
-			$(SRCS_PATH)/ray.c
-OBJS	=	$(SRCS:.c=.o)
+SRCS_PATH = srcs
+SRC_LIST =	main.c \
+			parsing.c \
+			parsing_utils.c \
+			check_parsing.c \
+			mlx_init.c \
+			images.c \
+			initial_param.c \
+			minimap.c \
+			ray.c
+SRCS =		$(addprefix $(SRCS_PATH), $(SRC_LIST))
+OBJS	=	$(addprefix $(OBJ_PATH), $(SRC_LIST:.c=.o))
 
 
 all :		libft
@@ -45,7 +47,7 @@ $(NAME):	$(OBJS)
 libft:
 			$(LIBFT_MAKE)
 
-%.o:		%.c
+$(OBJ_PATH)%.o:		$(SRCS_PATH)/%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 
 clean :

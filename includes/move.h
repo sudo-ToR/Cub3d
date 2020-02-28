@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:21:34 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 19:37:48 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 20:01:20 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,5 @@
 # define X11_KEY_RELEASE        3
 # define X11_KEY_RELEASE_M      2
 
-# define STEP_FORWARD 13
-# define STEP_FORWARD 126 
 
 #endif
