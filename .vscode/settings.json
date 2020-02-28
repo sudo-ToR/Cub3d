@@ -10,6 +10,8 @@
 		"complex": "c",
 		"iterator": "c",
 		"memory": "c",
-		"vector": "c"
+		"vector": "c",
+		"image.h": "c",
+		"libft.h": "c"
 	}
 }

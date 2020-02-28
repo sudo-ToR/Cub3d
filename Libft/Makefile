@@ -6,7 +6,7 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/02/15 13:54:46 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/02/28 14:07:47 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 
-CFLAGS	= -Wall -Wextra -Werror -g  -Iincludes
+CFLAGS	= -Wall -Wextra -Werror -g3  -Iincludes
 
 
 %.o:	%.c		

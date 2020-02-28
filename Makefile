@@ -6,14 +6,14 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/02/27 11:45:14 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/02/28 14:13:19 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SUFFIXES:
 
 NAME	=	Cub3D 
-CC		= 	gcc -lmlx -framework OpenGL -framework AppKit
+CC		= 	gcc -fsanitize=address -lmlx -framework OpenGL -framework AppKit
 CFLAGS	= 	-g3 $(INCLUDES)
 
 LIBFT_PATH = ./Libft
@@ -31,7 +31,8 @@ SRCS	=	$(SRCS_PATH)/main.c \
 			$(SRCS_PATH)/mlx_init.c \
 			$(SRCS_PATH)/images.c \
 			$(SRCS_PATH)/initial_pos.c \
-			$(SRCS_PATH)/minimap.c
+			$(SRCS_PATH)/minimap.c \
+			$(SRCS_PATH)/ray.c
 OBJS	=	$(SRCS:.c=.o)
 
 

@@ -6,11 +6,11 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/27 13:38:24 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 14:08:31 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 t_img
 	*create_new_img(t_mlx *m, t_img *ptr, int width, int height)
@@ -30,7 +30,8 @@ void
 	int calcul;
 	unsigned int c;
 	
-	calcul = (pos.y - 1) * ref->w + (pos.x - 1);
+
+	calcul = (pos.y) * ref->w + (pos.x);
 	c = (color[0] << 16) | (color[1] << 8) | (color[2]);
 	((unsigned int *)ref->img)[calcul] = c;
 }
@@ -74,6 +75,7 @@ void
 			draw_pixel_hex(render, pixel, 0xffffffff, m);
 	}
 	
+void n() {}
 void
 	draw_column(double distance, t_mlx m, int column_nbr, char wall)
 {
@@ -97,16 +99,28 @@ void
 	floor_color[2] = 0;
 	i = 0;
 	pixel.x = floor(m.po.x - 1) + column_nbr;
-	pos.y = 0;
+	pos.y = 0.0;
+	// printf("000\n");
 	while (pos.y < m.p.r[1])
 	{
-		pixel.y = (int)floor(pos.y);
+		// printf("111\n");
+		pixel.y = (int)pos.y;
 		if (pos.y < ((double)(m.p.r[1] / 2)) - (heigth / 2))
+		{
+			// printf("x = %d\ty = %d\n", pixel.y, pixel.x);
+			// printf("x = %f\ty = %f\n", pos.y, pos.x);
 			draw_pixel(&m.render, pixel, ceil_color, m);
+		}
 		else if (pos.y <= (m.p.r[1] / 2) + (heigth / 2) && pos.y >= ((double)(m.p.r[1] / 2)) - (heigth / 2))
+		{
+			// printf("333\n");
 			draw_wall(&m.render, pixel, wall, m);
+		}
 		else if (pos.y > (m.p.r[1] / 2) + (heigth / 2))
+		{
+			// printf("444\n");
 		 	draw_pixel(&m.render, pixel, floor_color, m);
-		pos.y++;
+		}
+		pos.y += 1.;
 	}
 }
