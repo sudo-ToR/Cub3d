@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 14:08:31 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:43:52 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,52 +75,27 @@ void
 			draw_pixel_hex(render, pixel, 0xffffffff, m);
 	}
 	
-void n() {}
-void
-	draw_column(double distance, t_mlx m, int column_nbr, char wall)
+
+void		draw_column(double distance, t_mlx *m, int column_nbr, char wall)
 {
 	double				heigth;
 	int					i;
-	unsigned char		color[3];
-	unsigned char		floor_color[3];
-	unsigned char		ceil_color[3];
 	t_pos_fl			pos;
 	t_pos				pixel;
 	
-	heigth =  (double)m.p.r[1] / distance;
-	color[0] = 255;
-	color[1] = 255;
-	color[2] = 255;
-	ceil_color[0] = 0;
-	ceil_color[1] = 0;
-	ceil_color[2] = 255;
-	floor_color[0] = 255;
-	floor_color[1] = 0;
-	floor_color[2] = 0;
+	heigth =  (double)(m->p.r[1]) / distance;
 	i = 0;
-	pixel.x = floor(m.po.x - 1) + column_nbr;
+	pixel.x = floor(m->po.x - 1) + column_nbr;
 	pos.y = 0.0;
-	// printf("000\n");
-	while (pos.y < m.p.r[1])
+	while (pos.y < m->p.r[1])
 	{
-		// printf("111\n");
 		pixel.y = (int)pos.y;
-		if (pos.y < ((double)(m.p.r[1] / 2)) - (heigth / 2))
-		{
-			// printf("x = %d\ty = %d\n", pixel.y, pixel.x);
-			// printf("x = %f\ty = %f\n", pos.y, pos.x);
-			draw_pixel(&m.render, pixel, ceil_color, m);
-		}
-		else if (pos.y <= (m.p.r[1] / 2) + (heigth / 2) && pos.y >= ((double)(m.p.r[1] / 2)) - (heigth / 2))
-		{
-			// printf("333\n");
-			draw_wall(&m.render, pixel, wall, m);
-		}
-		else if (pos.y > (m.p.r[1] / 2) + (heigth / 2))
-		{
-			// printf("444\n");
-		 	draw_pixel(&m.render, pixel, floor_color, m);
-		}
+		if (pos.y < ((double)(m->p.r[1] / 2)) - (heigth / 2))
+			draw_pixel(&m->render, pixel, m->colors.ceil, *m);
+		else if (pos.y <= (m->p.r[1] / 2) + (heigth / 2) && pos.y >= ((double)(m->p.r[1] / 2)) - (heigth / 2))
+			draw_wall(&m->render, pixel, wall, *m);
+		else if (pos.y > (m->p.r[1] / 2) + (heigth / 2))
+		 	draw_pixel(&m->render, pixel, m->colors.floor, *m);
 		pos.y += 1.;
 	}
 }

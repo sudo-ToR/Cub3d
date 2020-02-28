@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/23 20:28:45 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 16:30:20 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			main(int ac, char **av)
 	int		fd;
 	t_mlx	m;
 
+	ft_memset(&m, 0, sizeof(m));
 	if (ac == 1)
 		return (ft_printf("Missing argument\n"));
 	if (check_argument(av[1]))
@@ -40,6 +41,6 @@ int			main(int ac, char **av)
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))
 		return (ft_printf("save option\n"));
 	else
-		ft_init_mlx(m);
+		ft_init_mlx(&m);
 	return (0);
 }

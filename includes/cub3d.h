@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 13:27:15 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/02/28 19:22:11 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <mlx.h>
 # include <math.h>
 # include "parsing.h"
+# include "move.h"
+
+
+
 
 typedef struct		s_img
 {
@@ -29,6 +33,12 @@ typedef struct		s_img
 	int		x;
 	int		y;
 }					t_img;
+
+typedef struct		s_colors
+{
+	unsigned char floor[3];
+	unsigned char ceil[3];
+}					t_colors;
 
 typedef struct		s_pos
 {
@@ -51,6 +61,7 @@ typedef struct		s_mlx
 	t_img		minimap;
 	t_img		render;
 	t_pars		p;
+	t_colors	colors;
 	t_pos		po;
 	t_pos_fl	pl;
 	t_pos_fl	inter;
@@ -59,7 +70,8 @@ typedef struct		s_mlx
 
 # include "image.h"
 
-void			ft_init_mlx(t_mlx m);
+void			set_color(t_mlx *m);
+void			ft_init_mlx(t_mlx *m);
 void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 
