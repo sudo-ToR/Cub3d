@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/02 21:31:12 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/02 22:11:35 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 	t_pos_fl coord;
 
 	coord.y = (((double)((double)m->pl.y - (int)m->pl.y) + 0.000001) * (double)dec);
+	printf("anle = %f\tcoeff = %f\n", m->cam_angle, coeff);
 	coord.x = coord.y / coeff;
 	while (coord.y + m->pl.y < m->p.height && coord.x + m->pl.x < m->p.width)
 	{
@@ -87,7 +88,7 @@ double		get_distance(double angle, t_mlx *m, char *wall)
 	coord = (t_pos) {0};
 	coeff =  tan(angle);
 	inc.x = (angle >= M_PI_2 && angle <= 3 * M_PI_2) ? -1 : 1;
-	inc.y = (angle > 0 && angle < M_PI) ? 1 : -1;
+	inc.y = (angle >= 0 && angle <= M_PI) ? 1 : -1;
 	distance.x = check_vert(m, coeff, inc.x) * cos(m->cam_angle - angle);
 	if (angle == 0 || angle == M_PI || angle == M_PI_2 || angle == 3 * M_PI_2)
 	{

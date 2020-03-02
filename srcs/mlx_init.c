@@ -6,11 +6,19 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/02 21:38:31 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/02 22:05:06 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	adjust_cam_angle(t_mlx *m)
+{
+	if (m->cam_angle > 2.0 * M_PI)
+		m->cam_angle -= 2.0 * M_PI;
+	if (m->cam_angle < 0)
+		m->cam_angle += 2.0 * M_PI;
+}
 
 int		key_press(int keycode, void *param)
 {
@@ -19,9 +27,7 @@ int		key_press(int keycode, void *param)
 	double		coeff;
 
 	m = (t_mlx *)param;
-	printf("%f\n", m->cam_angle);
-	if (m->cam_angle > 2.0 * M_PI)
-		m->cam_angle -= 2.0 * M_PI;
+	adjust_cam_angle(m);
 	coeff = tan(m->cam_angle);
 	if (keycode == 13 || keycode == 126)
 	{
