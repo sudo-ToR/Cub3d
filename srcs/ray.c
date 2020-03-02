@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 18:45:14 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/02 21:31:12 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 	t_pos_fl coord;
 
 	coord.x = (((double)((double)m->pl.x - (int)m->pl.x) + 0.000001) * (double)dec);
+	if (dec == 1)
+		coord.x = (int)(m->pl.x + dec) - m->pl.x + 0.000001;
 	coord.y = coeff * coord.x;
+	// printf("x = %f\tcoord.y = %f\tdiff = %f===>%f\n", m->pl.x, coord.y, coord.x, coord.x + m->pl.x);
 	while (coord.x + m->pl.x < m->p.width && coord.y + m->pl.y < m->p.height)
 	{
 		if (coord.y + m->pl.y < 0)
@@ -83,7 +86,7 @@ double		get_distance(double angle, t_mlx *m, char *wall)
 
 	coord = (t_pos) {0};
 	coeff =  tan(angle);
-	inc.x = (angle > M_PI_2 && angle < 3 * M_PI_2) ? -1 : 1;
+	inc.x = (angle >= M_PI_2 && angle <= 3 * M_PI_2) ? -1 : 1;
 	inc.y = (angle > 0 && angle < M_PI) ? 1 : -1;
 	distance.x = check_vert(m, coeff, inc.x) * cos(m->cam_angle - angle);
 	if (angle == 0 || angle == M_PI || angle == M_PI_2 || angle == 3 * M_PI_2)

@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 22:39:52 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/02 21:38:31 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		key_press(int keycode, void *param)
 	double		coeff;
 
 	m = (t_mlx *)param;
+	printf("%f\n", m->cam_angle);
+	if (m->cam_angle > 2.0 * M_PI)
+		m->cam_angle -= 2.0 * M_PI;
 	coeff = tan(m->cam_angle);
 	if (keycode == 13 || keycode == 126)
 	{
@@ -57,11 +60,11 @@ int		key_press(int keycode, void *param)
 	}
 	if (keycode == 124)
 	{
-		m->cam_angle += 0.5; 
+		m->cam_angle += 0.1;
 	}
 	if (keycode == 123)
 	{
-		m->cam_angle -= 0.5; 
+		m->cam_angle -= 0.1; 
 	}
 	minimap(m, m->cam_angle);
 	draw_image(m->cam_angle, m);
