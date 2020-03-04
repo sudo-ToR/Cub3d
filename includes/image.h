@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 12:18:41 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 16:44:04 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:38:41 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ double			check_hor(t_mlx *m, double coeff, int dec);
 double			get_distance(double angle, t_mlx *m, char *wall);
 void			draw_image(double cam_angle, t_mlx *m);
 
+void			adjust_cam_angle(double *angle);
 #endif

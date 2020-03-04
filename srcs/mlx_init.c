@@ -6,18 +6,18 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/02 22:05:06 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 16:50:42 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	adjust_cam_angle(t_mlx *m)
+void	adjust_cam_angle(double *angle)
 {
-	if (m->cam_angle > 2.0 * M_PI)
-		m->cam_angle -= 2.0 * M_PI;
-	if (m->cam_angle < 0)
-		m->cam_angle += 2.0 * M_PI;
+	if (*angle > 2.0 * M_PI)
+		*angle -= 2.0 * M_PI;
+	if (*angle < 0)
+		*angle += 2.0 * M_PI;
 }
 
 int		key_press(int keycode, void *param)
@@ -25,52 +25,22 @@ int		key_press(int keycode, void *param)
 	t_mlx 		*m;
 	t_pos_fl	new_coord;
 	double		coeff;
+	double		step;
 
 	m = (t_mlx *)param;
-	adjust_cam_angle(m);
+	step = 0.5;
+	adjust_cam_angle(&m->cam_angle);
 	coeff = tan(m->cam_angle);
+	if (keycode == 124)
+		m->cam_angle += 0.1;
+	if (keycode == 123)
+		m->cam_angle -= 0.1;
 	if (keycode == 13 || keycode == 126)
 	{
-		new_coord.y = (m->cam_angle > 0 && m->cam_angle < M_PI) ? m->pl.y + 0.5 : m->pl.y - 0.5;
-		new_coord.x = (m->cam_angle == M_PI_2 || m->cam_angle == 3 * M_PI_2) ? m->pl.x: m->pl.x - 0.5 / coeff;
-		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
-		{
-			m->pl.x = new_coord.x;
-			m->pl.y = new_coord.y;
-		}
-	}
-	if (keycode == 1 || keycode == 125)
-	{
-		new_coord.y = (m->cam_angle > 0 && m->cam_angle < M_PI) ? m->pl.y - 0.5 : m->pl.y + 0.5;
-		new_coord.x = (m->cam_angle == M_PI_2 || m->cam_angle == 3 * M_PI_2) ? m->pl.x : m->pl.x + 0.5 / coeff;
-		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
-		{
-			m->pl.x = new_coord.x;
-			m->pl.y = new_coord.y;
-		}
-	}
-	if (keycode == 0)
-	{
-		new_coord.x = ((m->cam_angle > 0 && m->cam_angle < M_PI_2) 
-			|| (m->cam_angle > 3. * M_PI_2  && m->cam_angle < 2. * M_PI_2)) ? m->pl.x + 0.5 : m->pl.x - 0.5;
-		new_coord.y = (m->cam_angle == 0 || m->cam_angle == M_PI) ? m->pl.y : m->pl.x + 0.5 * coeff;
-		if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '0')
-		{
-			m->pl.x = new_coord.x;
-			m->pl.y = new_coord.y;
-		}
-	}
-	if (keycode == 2)
-	{
-			m->pl.x += (m->pl.x < m->p.width + 1.5 && m->p.map[(int)(m->pl.y)][(int)(m->pl.x + 0.5)] == '0') ? 0.5 : 0; 
-	}
-	if (keycode == 124)
-	{
-		m->cam_angle += 0.1;
-	}
-	if (keycode == 123)
-	{
-		m->cam_angle -= 0.1; 
+		new_coord.y = (coeff * pow(step, 2)) / sqrt(1 + pow(coeff, 2));
+		printf("x = %f\ty = %f\n=======>%f\n",m->pl.x, m->pl.y, new_coord.y);
+		m->pl.y += copysign(new_coord.y, coeff);
+		m->pl.x += (coeff) ? new_coord.y / coeff : 0;
 	}
 	minimap(m, m->cam_angle);
 	draw_image(m->cam_angle, m);
