@@ -6,15 +6,16 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/03/02 21:02:10 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/03/04 22:24:26 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SUFFIXES:
 
 NAME	=	Cub3D 
-CC		= 	gcc -lmlx -framework OpenGL -framework AppKit
+CC		= 	gcc
 CFLAGS	= 	-g3 $(INCLUDES)
+LIBS	=  -lmlx -framework OpenGL -framework AppKit
 
 LIBFT_PATH = ./Libft
 OBJ_PATH =	./obj/
@@ -42,7 +43,7 @@ all :		libft
 			@$(MAKE) $(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(OBJS) $(LIBFT_LIB)  $(FT_PRINTF_LIB) -o $(NAME)
+			$(CC) $(OBJS) $(LIBS) $(LIBFT_LIB)  $(FT_PRINTF_LIB) -o $(NAME)
 
 libft:
 			$(LIBFT_MAKE)

@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/04 19:24:13 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 22:19:48 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,19 @@ int		key_press(int keycode, void *param)
 		/*new_coord.y = */m->pl.y -= step * cos(m->cam_angle);
 		/*new_coord.x = */m->pl.x += step * sin(m->cam_angle);
 	}
+	return (0);
+}
+
+int		game_loop(void *param)
+{
+	t_mlx 		*m;
+
+	m = (t_mlx *)param;
 	minimap(m, m->cam_angle);
 	draw_image(m->cam_angle, m);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
-	return (0);
+	return (1);
 }
 
 void	ft_init_mlx(t_mlx *m)
@@ -73,10 +81,11 @@ void	ft_init_mlx(t_mlx *m)
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	create_new_img(m, &m->render, m->p.r[0], m->p.r[1]);
 	create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16);
-	minimap(m, m->cam_angle);
-	draw_image(m->cam_angle, m);
-	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
-	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
+	// minimap(m, m->cam_angle);
+	// draw_image(m->cam_angle, m);
+	// mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
+	// mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
 	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
+	mlx_loop_hook(m->mlx_ptr, game_loop, m);
 	mlx_loop(m->mlx_ptr);
 }
