@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/02 22:11:35 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 11:55:08 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 	t_pos_fl coord;
 
 	coord.y = (((double)((double)m->pl.y - (int)m->pl.y) + 0.000001) * (double)dec);
-	printf("anle = %f\tcoeff = %f\n", m->cam_angle, coeff);
 	coord.x = coord.y / coeff;
+	printf("anle = %f\tcoeff = %f\tx = %f\n", m->cam_angle, coeff, coord.x);
 	while (coord.y + m->pl.y < m->p.height && coord.x + m->pl.x < m->p.width)
 	{
 		if (coord.x + m->pl.x < 0)
