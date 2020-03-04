@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 16:43:52 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 18:47:41 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void
 	}
 	
 
-void		draw_column(double distance, t_mlx *m, int column_nbr, char wall)
+void
+	draw_column(double distance, t_mlx *m, int column_nbr, char wall)
 {
 	double				heigth;
 	int					i;

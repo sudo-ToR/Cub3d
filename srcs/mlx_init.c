@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/04 16:50:42 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/04 19:24:13 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,23 @@ int		key_press(int keycode, void *param)
 		m->cam_angle -= 0.1;
 	if (keycode == 13 || keycode == 126)
 	{
-		new_coord.y = (coeff * pow(step, 2)) / sqrt(1 + pow(coeff, 2));
-		printf("x = %f\ty = %f\n=======>%f\n",m->pl.x, m->pl.y, new_coord.y);
-		m->pl.y += copysign(new_coord.y, coeff);
-		m->pl.x += (coeff) ? new_coord.y / coeff : 0;
+		/*new_coord.y = */m->pl.y -= step * cos(m->cam_angle + M_PI_2);
+		/*new_coord.x = */m->pl.x += step * sin(m->cam_angle + M_PI_2);
+	}
+	if (keycode == 1 || keycode == 125)
+	{
+		/*new_coord.y = */m->pl.y += step * cos(m->cam_angle + M_PI_2);
+		/*new_coord.x = */m->pl.x -= step * sin(m->cam_angle + M_PI_2);
+	}
+	if (keycode == 2)
+	{
+		/*new_coord.y = */m->pl.y += step * cos(m->cam_angle);
+		/*new_coord.x = */m->pl.x -= step * sin(m->cam_angle);
+	}
+		if (keycode == 0)
+	{
+		/*new_coord.y = */m->pl.y -= step * cos(m->cam_angle);
+		/*new_coord.x = */m->pl.x += step * sin(m->cam_angle);
 	}
 	minimap(m, m->cam_angle);
 	draw_image(m->cam_angle, m);
