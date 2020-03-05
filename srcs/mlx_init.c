@@ -6,11 +6,13 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/04 22:19:48 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/05 20:22:17 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	n(){}
 
 void	adjust_cam_angle(double *angle)
 {
@@ -19,6 +21,7 @@ void	adjust_cam_angle(double *angle)
 	if (*angle < 0)
 		*angle += 2.0 * M_PI;
 }
+
 
 int		key_press(int keycode, void *param)
 {
@@ -81,10 +84,6 @@ void	ft_init_mlx(t_mlx *m)
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	create_new_img(m, &m->render, m->p.r[0], m->p.r[1]);
 	create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16);
-	// minimap(m, m->cam_angle);
-	// draw_image(m->cam_angle, m);
-	// mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
-	// mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
 	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
 	mlx_loop_hook(m->mlx_ptr, game_loop, m);
 	mlx_loop(m->mlx_ptr);
