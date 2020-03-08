@@ -1,5 +1,5 @@
 R 1920 1080
-NO config_files/path_to_the_north_texture
+NO config_files/no_text.xpm
 SO config_files/path_to_the_south_texture
 WE config_files/path_to_the_west_texture
 EA config_files/path_to_the_east_texture

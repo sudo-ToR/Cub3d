@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/05 20:22:17 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/08 19:59:41 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_init_mlx(t_mlx *m)
 	set_color(m);
 	get_initial_position(&v, m->p, &m->pl);
 	init_dir_vector(v, &m->cam_angle);
+	if (!(create_text(m, &m->no_text, m->p.no)))
+		return;
 	m->mlx_ptr = mlx_init();
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	create_new_img(m, &m->render, m->p.r[0], m->p.r[1]);

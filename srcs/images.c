@@ -6,11 +6,21 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/04 18:47:41 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/08 20:01:56 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+t_img
+	*create_text(t_mlx *m, t_img *text, char *path)
+{
+	if (!(text->ref = mlx_xpm_file_to_image(m->mlx_ptr, path, &text->w, &text->h)))
+		return (NULL);
+	if (!(text->img = (mlx_get_data_addr(text->ref, &text->bits_per_pixel, &text->size_line, &text->endian))))
+		return (NULL);
+	return (text);
+}
 
 t_img
 	*create_new_img(t_mlx *m, t_img *ptr, int width, int height)

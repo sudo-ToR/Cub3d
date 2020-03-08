@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/05 18:29:27 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/08 19:59:16 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 			return (FLT_MAX);
 		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '1')
 		{
-			// draw_pixel_hex(&m->minimap, (t_pos){(coord.x  + m->pl.x) * 16, (coord.y + m->pl.y) * 16}, 0xffff0000, *m);
+			draw_pixel_hex(&m->minimap, (t_pos){(coord.x  + m->pl.x) * 16, (coord.y + m->pl.y) * 16}, 0xffff0000, *m);
 			return (sqrt(pow(coord.y, 2) + pow((double)coord.x, 2)));
 		}
 		coord.x += (double)dec;
@@ -52,7 +52,7 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 			return (FLT_MAX);
 		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '1')
 		{
-			// draw_pixel_hex(&m->minimap, (t_pos){ (coord.x  + m->pl.x)* 16.0,  (coord.y + m->pl.y) * 16.0}, 0xffffffff, *m);
+			draw_pixel_hex(&m->minimap, (t_pos){ (coord.x  + m->pl.x)* 16.0,  (coord.y + m->pl.y) * 16.0}, 0xffffffff, *m);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
 		coord.y += dec;

@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/28 20:40:00 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/08 19:53:45 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_mlx
 	void		*img_ptr;
 	t_img		minimap;
 	t_img		render;
+	t_img		no_text;
 	t_pars		p;
 	t_colors	colors;
 	t_pos		po;
