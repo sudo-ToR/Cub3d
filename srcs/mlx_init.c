@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/08 19:59:41 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:08:31 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,27 @@ void	adjust_cam_angle(double *angle)
 		*angle += 2.0 * M_PI;
 }
 
+void	move(t_pos_fl step, t_mlx *m, double rota)
+{
+	t_pos_fl	new_coord;
+
+	new_coord.x = m->pl.x + step.x * sin(m->cam_angle + rota);
+	new_coord.y = m->pl.y + step.y * cos(m->cam_angle + rota);
+	if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '1')
+		return;
+	else
+	{
+		m->pl.x = new_coord.x;
+		m->pl.y = new_coord.y;
+	}
+}
 
 int		key_press(int keycode, void *param)
 {
 	t_mlx 		*m;
-	t_pos_fl	new_coord;
 	double		coeff;
-	double		step;
 
 	m = (t_mlx *)param;
-	step = 0.5;
 	adjust_cam_angle(&m->cam_angle);
 	coeff = tan(m->cam_angle);
 	if (keycode == 124)
@@ -39,25 +50,13 @@ int		key_press(int keycode, void *param)
 	if (keycode == 123)
 		m->cam_angle -= 0.1;
 	if (keycode == 13 || keycode == 126)
-	{
-		/*new_coord.y = */m->pl.y -= step * cos(m->cam_angle + M_PI_2);
-		/*new_coord.x = */m->pl.x += step * sin(m->cam_angle + M_PI_2);
-	}
+		move((t_pos_fl) {0.5, -0.5}, m, M_PI_2);
 	if (keycode == 1 || keycode == 125)
-	{
-		/*new_coord.y = */m->pl.y += step * cos(m->cam_angle + M_PI_2);
-		/*new_coord.x = */m->pl.x -= step * sin(m->cam_angle + M_PI_2);
-	}
+		move((t_pos_fl) {-0.5, 0.5}, m, M_PI_2);
 	if (keycode == 2)
-	{
-		/*new_coord.y = */m->pl.y += step * cos(m->cam_angle);
-		/*new_coord.x = */m->pl.x -= step * sin(m->cam_angle);
-	}
-		if (keycode == 0)
-	{
-		/*new_coord.y = */m->pl.y -= step * cos(m->cam_angle);
-		/*new_coord.x = */m->pl.x += step * sin(m->cam_angle);
-	}
+		move((t_pos_fl) {-0.5, 0.5}, m, 0.);
+	if (keycode == 0)
+		move((t_pos_fl) {0.5, -0.5}, m, 0.);
 	return (0);
 }
 
@@ -80,9 +79,9 @@ void	ft_init_mlx(t_mlx *m)
 	set_color(m);
 	get_initial_position(&v, m->p, &m->pl);
 	init_dir_vector(v, &m->cam_angle);
+	m->mlx_ptr = mlx_init();
 	if (!(create_text(m, &m->no_text, m->p.no)))
 		return;
-	m->mlx_ptr = mlx_init();
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	create_new_img(m, &m->render, m->p.r[0], m->p.r[1]);
 	create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16);

@@ -1,9 +1,9 @@
 R 1920 1080
 NO config_files/no_text.xpm
-SO config_files/path_to_the_south_texture
-WE config_files/path_to_the_west_texture
-EA config_files/path_to_the_east_texture
-S config_files/path_to_the_sprite_texture
+SO config_files/no_text.xpm
+WE config_files/no_text.xpm
+EA config_files/no_text.xpm
+S config_files/no_text.xpm
 F 220,100,0
 C 50,50,50
 
@@ -17,7 +17,7 @@ C 50,50,50
 1 0 0 1 0 1 1 0 0 0 1 1 0 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 1 0 1 0 0 1 0 0 0 1
-1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 0 0 0 0 0 0 1 0 E 0 1
+1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 0 0 0 0 0 0 1 0 S 0 1
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 1
 1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 1 1 0 1 1 1 1 0 1 0 1

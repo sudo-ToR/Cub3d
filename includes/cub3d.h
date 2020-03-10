@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/08 19:53:45 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:45:38 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ typedef struct		s_pos_fl
 	double y;
 }					t_pos_fl;
 
+typedef	struct		s_ray
+{
+	t_pos_fl	coord;
+	t_pos_fl	wall_coord;
+}					t_ray;
 
 typedef struct		s_mlx
 {
@@ -63,11 +68,13 @@ typedef struct		s_mlx
 	t_img		minimap;
 	t_img		render;
 	t_img		no_text;
+	t_ray		ray;
+	t_pos_fl	coord_vert;
+	t_pos_fl	coord_hor;
 	t_pars		p;
 	t_colors	colors;
 	t_pos		po;
 	t_pos_fl	pl;
-	t_pos_fl	inter;
 	double		cam_angle;
 }					t_mlx;
 

@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/08 20:01:56 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:31:12 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void
 	int calcul;
 	unsigned int c;
 	
-
-	calcul = (pos.y) * ref->w + (pos.x);
+	calcul = pos.y * ref->w + pos.x;
 	c = (color[0] << 16) | (color[1] << 8) | (color[2]);
 	((unsigned int *)ref->img)[calcul] = c;
 }
@@ -76,13 +75,29 @@ void
 	}
 }
 
+unsigned char	*get_pixel_texture(t_img *texture, t_pos coord)
+{
+	int				index;
+
+	index = texture->size_line * coord.y + coord.x;
+	return ((unsigned char *)&texture->img[index]);
+}
+
 void
-	draw_wall(t_img *render, t_pos pixel, char wall, t_mlx m)
+	draw_wall(t_img *render, t_pos pixel, char wall, t_mlx *m, double heigth)
 	{
-		if (wall == 'V')
-			draw_pixel_hex(render, pixel, 0xffff0000, m);
+		t_pos_fl	ratio;
+		t_pos		coord;
+
+
+		/*if (m->cam_angle >= M_PI_4 && m->cam_angle <= 3. * M_PI_4)
+		{
+			draw_pixel(render, pixel, get_pixel_texture(&m->no_text, coord), *m);
+		}
+		else*/ if (wall == 'V')
+			draw_pixel_hex(render, pixel, 0xffff0000, *m);
 		else if (wall == 'H')
-			draw_pixel_hex(render, pixel, 0xffffffff, m);
+			draw_pixel_hex(render, pixel, 0xffffffff, *m);
 	}
 	
 
@@ -96,17 +111,19 @@ void
 	
 	heigth =  (double)(m->p.r[1]) / distance;
 	i = 0;
+	m->ray.wall_coord.y = (double)(m->p.r[1] / 2.) + (heigth / 2.);
+	m->ray.wall_coord.x = (double)(m->p.r[1] / 2.) - (heigth / 2.);
 	pixel.x = floor(m->po.x - 1) + column_nbr;
 	pos.y = 0.0;
 	while (pos.y < m->p.r[1])
 	{
 		pixel.y = (int)pos.y;
-		if (pos.y < ((double)(m->p.r[1] / 2)) - (heigth / 2))
+		if (pos.y < m->ray.wall_coord.x)
 			draw_pixel(&m->render, pixel, m->colors.ceil, *m);
-		else if (pos.y <= (m->p.r[1] / 2) + (heigth / 2) && pos.y >= ((double)(m->p.r[1] / 2)) - (heigth / 2))
-			draw_wall(&m->render, pixel, wall, *m);
-		else if (pos.y > (m->p.r[1] / 2) + (heigth / 2))
-		 	draw_pixel(&m->render, pixel, m->colors.floor, *m);
+		else if (pos.y <= m->ray.wall_coord.y && pos.y >= m->ray.wall_coord.x)
+			draw_wall(&m->render, pixel, wall, m, heigth);
+		else if (pos.y > m->ray.wall_coord.y)
+			draw_pixel(&m->render, pixel, m->colors.floor, *m);
 		pos.y += 1.;
 	}
 }

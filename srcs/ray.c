@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/08 19:59:16 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:46:34 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 			return (FLT_MAX);
 		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '1')
 		{
+			m->coord_vert.x = coord.x + m->pl.x;
+			m->coord_vert.y = coord.y + m->pl.y;
 			draw_pixel_hex(&m->minimap, (t_pos){(coord.x  + m->pl.x) * 16, (coord.y + m->pl.y) * 16}, 0xffff0000, *m);
 			return (sqrt(pow(coord.y, 2) + pow((double)coord.x, 2)));
 		}
@@ -52,6 +54,8 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 			return (FLT_MAX);
 		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '1')
 		{
+			m->coord_hor.x = coord.x + m->pl.x;
+			m->coord_hor.y = coord.y + m->pl.y;
 			draw_pixel_hex(&m->minimap, (t_pos){ (coord.x  + m->pl.x)* 16.0,  (coord.y + m->pl.y) * 16.0}, 0xffffffff, *m);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
@@ -98,5 +102,9 @@ double		get_distance(double angle, t_mlx *m, char *wall)
 	distance.x = check_vert(m, coeff, inc.x) * cos(m->cam_angle - angle);
 	distance.y = check_hor(m, coeff, inc.y) * cos(m->cam_angle - angle);
 	*wall = (distance.x > distance.y) ? 'H' : 'V';
+	if (distance.x > distance.y)
+		m->ray.coord = (t_pos_fl)m->coord_hor;
+	else
+		m->ray.coord = (t_pos_fl)m->coord_vert;
 	return (fmin(distance.x, distance.y));
 }
