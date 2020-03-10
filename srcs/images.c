@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/10 19:31:12 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:52:05 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,20 @@ unsigned char	*get_pixel_texture(t_img *texture, t_pos coord)
 void
 	draw_wall(t_img *render, t_pos pixel, char wall, t_mlx *m, double heigth)
 	{
-		t_pos_fl	ratio;
+		double		ratio;
 		t_pos		coord;
 
-
-		/*if (m->cam_angle >= M_PI_4 && m->cam_angle <= 3. * M_PI_4)
+		ratio = m->ray.coord.x - (int)m->ray.coord.x;
+		coord = (t_pos)
+		{
+			.x = ratio * m->no_text.w,
+			.y = (pixel.y - m->ray.wall_coord.x) * (m->no_text.h / heigth)
+		};
+		if (m->cam_angle >= M_PI_4 && m->cam_angle <= 3. * M_PI_4)
 		{
 			draw_pixel(render, pixel, get_pixel_texture(&m->no_text, coord), *m);
 		}
-		else*/ if (wall == 'V')
+		else if (wall == 'V')
 			draw_pixel_hex(render, pixel, 0xffff0000, *m);
 		else if (wall == 'H')
 			draw_pixel_hex(render, pixel, 0xffffffff, *m);
