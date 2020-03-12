@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 17:31:01 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:53:14 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ t_img
 }
 
 void
-	draw_pixel(t_img *ref, t_pos pos, unsigned char color[3])
+	draw_pixel(t_img *ref, t_pos pos, char color[3])
 {
-	// int	index;
+	int	index;
 
-	// index = ref->size_line * pos.y + (ref->bits_per_pixel / 8) * pos.x;
-	// ref->img[index] = color[2];
-	// ref->img[index + 1] = color[1];
-	// ref->img[index + 2] = color[0];
-	int calcul;
-	unsigned int c;
+	index = ref->size_line * pos.y + (ref->bits_per_pixel / 8) * pos.x;
+	ref->img[index] = color[2];
+	ref->img[index + 1] = color[1];
+	ref->img[index + 2] = color[0];
+	// int calcul;
+	// unsigned int c;
 	
-	calcul = pos.y * ref->w + pos.x;
-	c = (color[0] << 16) | (color[1] << 8) | (color[2]);
-	((unsigned int *)ref->img)[calcul] = c;
+	// calcul = pos.y * ref->w + pos.x;
+	// c = (color[0] << 16) | (color[1] << 8) | (color[2]);
+	// ((unsigned int *)ref->img)[calcul] = c;
 }
 
 void
@@ -81,12 +81,12 @@ void
 	}
 }
 
-unsigned char	*get_pixel_texture(t_img *texture, t_pos coord)
+char	*get_pixel_texture(t_img *texture, t_pos coord)
 {
 	int				index;
 
 	index = texture->size_line * coord.y + texture->bits_per_pixel / 8 * coord.x;
-	return ((unsigned char *)&texture->img[index]);
+	return (&texture->img[index]);
 }
 
 void
@@ -96,13 +96,11 @@ void
 		t_pos		coord;
 
 		ratio = m->ray.coord.x - floor(m->ray.coord.x);
-		// printf("%f\n", (pixel.y - m->ray.wall_coord.x) * (m->no_text.h / heigth));
 		coord = (t_pos)
 		{
 			.x = ratio * m->no_text.w,
-			.y = ((double)pixel.y - m->ray.wall_coord.x) * (double)m->no_text.h / heigth
+			.y = (pixel.y - m->ray.wall_coord.x) * (double)m->no_text.h / heigth
 		};
-		// printf("height : %f\n",heigth);
 		draw_pixel(render, pixel, get_pixel_texture(&m->no_text, coord));
 	}
 	

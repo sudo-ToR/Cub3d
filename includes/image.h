@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 12:18:41 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 12:13:16 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:50:48 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 t_img			*create_new_img(t_mlx *m, t_img *ptr, int width, int height);
-void			draw_pixel(t_img *ref, t_pos pos, unsigned char color[3]);
+void			draw_pixel(t_img *ref, t_pos pos, char color[3]);
 void			draw_pixel_hex(t_img *ref, t_pos pos, unsigned int hexcolor);
 void			draw_square(t_img *ptr, int i, int j, unsigned int color, int width);
 void			minimap(t_mlx *m);

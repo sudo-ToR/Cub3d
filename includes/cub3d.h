@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/10 19:49:12 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:49:32 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct		s_img
 
 typedef struct		s_colors
 {
-	unsigned char floor[3];
-	unsigned char ceil[3];
+	char floor[3];
+	char ceil[3];
 }					t_colors;
 
 typedef struct		s_pos

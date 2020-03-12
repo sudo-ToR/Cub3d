@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 16:56:37 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 20:08:29 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 	if (dec == 1)
 		coord.x = floor(m->pl.x + dec) - m->pl.x + 0.000001;
 	else
-		coord.x = -((double)((double)m->pl.x - floor(m->pl.x)) + 0.000001);
+		coord.x = -(((double)m->pl.x - floor(m->pl.x)) + 0.000001);
 	coord.y = coeff * coord.x;
-	while (coord.x + m->pl.x < (double)m->p.width && coord.y + m->pl.y < (double)m->p.height)
+	while (coord.x + m->pl.x < m->p.width && coord.y + m->pl.y < m->p.height)
 	{
 		if (coord.y + m->pl.y < 0)
 			return (FLT_MAX);
 		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '1')
 		{
-			m->coord_vert.x = coord.y + m->pl.x;
-			m->coord_vert.y = coord.x + m->pl.y;
+			m->coord_vert.y = coord.x + m->pl.x;
+			m->coord_vert.x = coord.y + m->pl.y;
 			draw_pixel_hex(&m->minimap, (t_pos){(coord.x  + m->pl.x) * 16, (coord.y + m->pl.y) * 16}, 0xffff0000);
-			return (sqrt(pow(coord.y, 2) + pow((double)coord.x, 2)));
+			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
 		coord.x += (double)dec;
 		coord.y = coeff * coord.x;
@@ -46,9 +46,9 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 	if (dec == 1)
 		coord.y = floor(m->pl.y + dec) - m->pl.y + 0.000001;
 	else
-		coord.y = (((double)((double)m->pl.y - floor(m->pl.y)) + 0.000001) * (double)dec);
+		coord.y = (m->pl.y - floor(m->pl.y) + 0.000001) * (double)dec;
 	coord.x = coord.y / coeff;
-	while (coord.y + m->pl.y < (double)m->p.height && coord.x + m->pl.x < (double)m->p.width)
+	while (coord.y + m->pl.y < m->p.height && coord.x + m->pl.x < m->p.width)
 	{
 		if (coord.x + m->pl.x < 0. || coeff == 1.)
 			return (FLT_MAX);

@@ -6,7 +6,7 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 12:17:24 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:07:09 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int		key_press(int keycode, void *param)
 	if (keycode == 123)
 		m->cam_angle -= 0.1;
 	if (keycode == 13 || keycode == 126)
-		move((t_pos_fl) {0.5, -0.5}, m, M_PI_2);
+		move((t_pos_fl) {0.1, -0.1}, m, M_PI_2);
 	if (keycode == 1 || keycode == 125)
-		move((t_pos_fl) {-0.5, 0.5}, m, M_PI_2);
+		move((t_pos_fl) {-0.1, 0.1}, m, M_PI_2);
 	if (keycode == 2)
-		move((t_pos_fl) {-0.5, 0.5}, m, 0.);
+		move((t_pos_fl) {-0.1, 0.1}, m, 0.);
 	if (keycode == 0)
-		move((t_pos_fl) {0.5, -0.5}, m, 0.);
+		move((t_pos_fl) {0.1, -0.1}, m, 0.);
 	return (0);
 }
 
