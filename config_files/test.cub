@@ -1,11 +1,11 @@
-R 1920 1080
+R 1000 800
 NO config_files/no_text.xpm
-SO config_files/no_text.xpm
-WE config_files/no_text.xpm
-EA config_files/no_text.xpm
-S config_files/no_text.xpm
-F 220,100,0
-C 50,50,50
+SO config_files/wood.xpm
+WE config_files/wood.xpm
+EA config_files/wood.xpm
+S config_files/wood.xpm
+F 255,000,0
+C 24,187,200
 
 
 

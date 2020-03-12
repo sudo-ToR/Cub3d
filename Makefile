@@ -6,7 +6,7 @@
 #    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/03/08 19:54:50 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/03/12 12:10:05 by lnoirot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME	=	Cub3D 
 CC		= 	gcc
-CFLAGS	= 	-g3 $(INCLUDES)
+CFLAGS	= 	-Wall -Wextra -Werror -g3 $(INCLUDES)
 LIBS	=  -lmlx -framework OpenGL -framework AppKit
 
 LIBFT_PATH = ./Libft

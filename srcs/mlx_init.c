@@ -6,13 +6,11 @@
 /*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/10 19:08:31 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/03/12 12:17:24 by lnoirot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	n(){}
 
 void	adjust_cam_angle(double *angle)
 {
@@ -28,9 +26,7 @@ void	move(t_pos_fl step, t_mlx *m, double rota)
 
 	new_coord.x = m->pl.x + step.x * sin(m->cam_angle + rota);
 	new_coord.y = m->pl.y + step.y * cos(m->cam_angle + rota);
-	if (m->p.map[(int)new_coord.y][(int)new_coord.x] == '1')
-		return;
-	else
+	if (m->p.map[(int)new_coord.y][(int)new_coord.x] != '1')
 	{
 		m->pl.x = new_coord.x;
 		m->pl.y = new_coord.y;
@@ -65,7 +61,7 @@ int		game_loop(void *param)
 	t_mlx 		*m;
 
 	m = (t_mlx *)param;
-	minimap(m, m->cam_angle);
+	minimap(m);
 	draw_image(m->cam_angle, m);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
