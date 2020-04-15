@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include <math.h>
 # include "parsing.h"
 
@@ -57,6 +57,7 @@ typedef struct		s_pos_fl
 typedef	struct		s_ray
 {
 	t_pos_fl	coord;
+	int			dir_wall;
 	t_pos_fl	wall_coord;
 }					t_ray;
 
@@ -68,6 +69,9 @@ typedef struct		s_mlx
 	t_img		minimap;
 	t_img		render;
 	t_img		no_text;
+	t_img		so_text;
+	t_img		ea_text;
+	t_img		we_text;
 	t_ray		ray;
 	t_pos_fl	coord_vert;
 	t_pos_fl	coord_hor;
@@ -76,6 +80,7 @@ typedef struct		s_mlx
 	t_pos		po;
 	t_pos_fl	pl;
 	double		cam_angle;
+	double		ray_angle;
 }					t_mlx;
 
 # include "image.h"

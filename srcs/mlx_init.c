@@ -41,17 +41,17 @@ int		key_press(int keycode, void *param)
 	m = (t_mlx *)param;
 	adjust_cam_angle(&m->cam_angle);
 	coeff = tan(m->cam_angle);
-	if (keycode == 124)
+	if (keycode == 100)
 		m->cam_angle += 0.1;
-	if (keycode == 123)
+	if (keycode == 97)
 		m->cam_angle -= 0.1;
-	if (keycode == 13 || keycode == 126)
+	if (keycode == 65362 || keycode == 119)
 		move((t_pos_fl) {0.1, -0.1}, m, M_PI_2);
-	if (keycode == 1 || keycode == 125)
+	if (keycode == 65364 || keycode == 115)
 		move((t_pos_fl) {-0.1, 0.1}, m, M_PI_2);
-	if (keycode == 2)
+	if (keycode == 65363)
 		move((t_pos_fl) {-0.1, 0.1}, m, 0.);
-	if (keycode == 0)
+	if (keycode == 65361)
 		move((t_pos_fl) {0.1, -0.1}, m, 0.);
 	return (0);
 }
@@ -78,9 +78,17 @@ void	ft_init_mlx(t_mlx *m)
 	m->mlx_ptr = mlx_init();
 	if (!(create_text(m, &m->no_text, m->p.no)))
 		return;
+	if (!(create_text(m, &m->so_text, m->p.so)))
+		return;
+	if (!(create_text(m, &m->we_text, m->p.we)))
+		return;
+	if (!(create_text(m, &m->ea_text, m->p.ea)))
+		return;
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
-	create_new_img(m, &m->render, m->p.r[0], m->p.r[1]);
-	create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16);
+	if (!create_new_img(m, &m->render, m->p.r[0], m->p.r[1]))
+		return;
+	if (!create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16))
+		return;
 	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
 	mlx_loop_hook(m->mlx_ptr, game_loop, m);
 	mlx_loop(m->mlx_ptr);

@@ -84,6 +84,8 @@ void		clean_num(char *line, int id, int **res)
 	else
 		*res = NULL;
 	free(line);
+	if (res && id == 1)
+		ft_swap(*res);
 }
 
 void		get_texture(t_pars *p, char *line)

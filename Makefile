@@ -13,9 +13,9 @@
 .SUFFIXES:
 
 NAME	=	Cub3D 
-CC		= 	gcc
+CC		= 	clang
 CFLAGS	= 	-Wall -Wextra -Werror -g3 $(INCLUDES)
-LIBS	=  -lmlx -framework OpenGL -framework AppKit
+LIBS	=  -L./mlx -lmlx -lbsd -lm -lXext -lX11
 
 LIBFT_PATH = ./Libft
 OBJ_PATH =	./obj/

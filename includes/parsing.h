@@ -60,5 +60,6 @@ int			ft_clean_map(char **map, int nbr_line);
 int			ft_check_parsing(t_pars *p, int fd);
 int			aff_error(int error);
 int			check_char_map(char c);
+void		ft_swap(int *color);
 
 #endif

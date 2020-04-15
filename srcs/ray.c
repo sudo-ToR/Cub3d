@@ -75,10 +75,11 @@ void		draw_image(double cam_angle, t_mlx *m)
 	if (cam_angle < M_PI / 6.0)
 		cam_angle += 2.0 * M_PI;
 	angle = - (M_PI / 6.0) + cam_angle;
-	var_angle = M_PI / 3 / m->p.r[0];
+	var_angle = M_PI / 3. / m->p.r[0];
 	i = 0;
 	while (angle <= M_PI / 6. + cam_angle && i < m->p.r[0])
 	{
+		m->ray_angle = angle;
 		adjust_cam_angle(&angle);
 		distance = get_distance(angle, m);
 		draw_column(distance, m, i);
@@ -101,8 +102,14 @@ double		get_distance(double angle, t_mlx *m)
 	distance.x = check_vert(m, coeff, inc.x) * cos(m->cam_angle - angle);
 	distance.y = check_hor(m, coeff, inc.y) * cos(m->cam_angle - angle);
 	if (distance.x > distance.y)
+	{
 		m->ray.coord = (t_pos_fl)m->coord_hor;
+		m->ray.dir_wall = 0;
+	}
 	else
+	{
 		m->ray.coord = (t_pos_fl)m->coord_vert;
+		m->ray.dir_wall = 1;
+	}
 	return (fmin(distance.x, distance.y));
 }

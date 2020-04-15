@@ -12,8 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-t_img
-	*create_text(t_mlx *m, t_img *text, char *path)
+t_img	*create_text(t_mlx *m, t_img *text, char *path)
 {
 	if (!(text->ref = mlx_xpm_file_to_image(m->mlx_ptr, path, &text->w, &text->h)))
 		return (NULL);
@@ -22,8 +21,7 @@ t_img
 	return (text);
 }
 
-t_img
-	*create_new_img(t_mlx *m, t_img *ptr, int width, int height)
+t_img	*create_new_img(t_mlx *m, t_img *ptr, int width, int height)
 {
 	if (!(ptr->ref = mlx_new_image(m->mlx_ptr, width, height)))
 		return (NULL);
@@ -34,15 +32,14 @@ t_img
 	return (ptr);
 }
 
-void
-	draw_pixel(t_img *ref, t_pos pos, char color[3])
+void	draw_pixel(t_img *ref, t_pos pos, char color[3])
 {
 	int	index;
 
 	index = ref->size_line * pos.y + (ref->bits_per_pixel / 8) * pos.x;
-	ref->img[index] = color[2];
+	ref->img[index] = color[0];
 	ref->img[index + 1] = color[1];
-	ref->img[index + 2] = color[0];
+	ref->img[index + 2] = color[2];
 	// int calcul;
 	// unsigned int c;
 	
@@ -51,8 +48,7 @@ void
 	// ((unsigned int *)ref->img)[calcul] = c;
 }
 
-void
-	draw_pixel_hex(t_img *ref, t_pos pos, unsigned int hexcolor)
+void	draw_pixel_hex(t_img *ref, t_pos pos, unsigned int hexcolor)
 {
 	int calcul;
 
@@ -61,8 +57,7 @@ void
 	((unsigned int *)ref->img)[calcul] = hexcolor;
 }
 
-void
-	draw_square(t_img *ptr, int i, int j, unsigned int color, int width)
+void	draw_square(t_img *ptr, int i, int j, unsigned int color, int width)
 {
 	t_pos square;
 
@@ -89,24 +84,37 @@ char	*get_pixel_texture(t_img *texture, t_pos coord)
 	return (&texture->img[index]);
 }
 
-void
-	draw_wall(t_img *render, t_pos pixel, t_mlx *m, double heigth)
+void	select_texture(t_img **texture, t_mlx *m)
+{
+	if (!m->ray.dir_wall)
+		*texture = &m->no_text;
+	else
+	{
+		if (m->ray.dir_wall && m->cam_angle - m->ray_angle >= 0)
+			*texture = &m->we_text;
+		else 
+			*texture = &m->ea_text;
+	}
+}
+
+void	draw_wall(t_img *render, t_pos pixel, t_mlx *m, double heigth)
 	{
 		double		ratio;
+		t_img		*texture;
 		t_pos		coord;
 
 		ratio = m->ray.coord.x - floor(m->ray.coord.x);
+		texture = NULL;
+		select_texture(&texture, m);
 		coord = (t_pos)
 		{
-			.x = ratio * m->no_text.w,
-			.y = (pixel.y - m->ray.wall_coord.x) * (double)m->no_text.h / heigth
+			.x = ratio * texture->w,
+			.y = (pixel.y - m->ray.wall_coord.x) * (double)texture->h / heigth
 		};
-		draw_pixel(render, pixel, get_pixel_texture(&m->no_text, coord));
+		draw_pixel(render, pixel, get_pixel_texture(texture, coord));
 	}
-	
 
-void
-	draw_column(double distance, t_mlx *m, int column_nbr)
+void	draw_column(double distance, t_mlx *m, int column_nbr)
 {
 	double				heigth;
 	t_pos_fl			pos;
@@ -116,7 +124,7 @@ void
 	m->ray.wall_coord.y = (double)(m->p.r[1] / 2.) + (heigth / 2.);
 	m->ray.wall_coord.x = (double)(m->p.r[1] / 2.) - (heigth / 2.);
 	pixel.x = column_nbr;
-	pos.y = 0.0;
+	pos.y = 0.;
 	while (pos.y < m->p.r[1])
 	{
 		pixel.y = (int)pos.y;

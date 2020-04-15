@@ -39,3 +39,12 @@ int			check_char_map(char c)
 		return (1);
 	return (0);
 }
+
+void	ft_swap(int *color)
+{
+	int		tmp;
+
+	tmp = color[0];
+	color[0] = color[2];
+	color[2] = tmp;
+}
