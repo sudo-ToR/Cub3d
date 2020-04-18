@@ -87,10 +87,15 @@ char	*get_pixel_texture(t_img *texture, t_pos coord)
 void	select_texture(t_img **texture, t_mlx *m)
 {
 	if (!m->ray.dir_wall)
-		*texture = &m->no_text;
+	{
+		if (m->ray_angle >= 0 && m->ray_angle <= M_PI)
+			*texture = &m->no_text;
+		else
+			*texture = &m->so_text;
+	}
 	else
 	{
-		if (m->ray.dir_wall && m->cam_angle - m->ray_angle >= 0)
+		if (m->ray_angle >= M_PI_2 && m->ray_angle <= 3. * M_PI_2)
 			*texture = &m->we_text;
 		else 
 			*texture = &m->ea_text;

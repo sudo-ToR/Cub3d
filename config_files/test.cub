@@ -1,6 +1,6 @@
 R 1000 800
 NO config_files/no_text.xpm
-SO config_files/wood.xpm
+SO config_files/texture_stones.xpm
 WE config_files/wood.xpm
 EA config_files/white_wall.xpm
 S config_files/wood.xpm
