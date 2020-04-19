@@ -4,7 +4,7 @@ SO config_files/texture_stones.xpm
 WE config_files/wood.xpm
 EA config_files/white_wall.xpm
 S config_files/wood.xpm
-F 255,000,0
+F 125,125,0
 C 24,187,200
 
 

@@ -35,7 +35,7 @@ int			main(int ac, char **av)
 		return (ft_printf(("First argument must be a .cub file\n")));
 	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p))
 	{
-	//	system("leaks Cub3D");
+		// system("leaks Cub3D");
 		return (1);
 	}
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))

@@ -67,6 +67,7 @@ typedef struct		s_mlx
 	void		*win_ptr;
 	void		*img_ptr;
 	t_img		minimap;
+	int			aff_minimap;
 	t_img		render;
 	t_img		no_text;
 	t_img		so_text;
@@ -86,7 +87,7 @@ typedef struct		s_mlx
 # include "image.h"
 
 void			set_color(t_mlx *m);
-void			ft_init_mlx(t_mlx *m);
+int				ft_init_mlx(t_mlx *m);
 void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 
