@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 18:07:09 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 12:13:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	adjust_cam_angle(double *angle)
 {
 	if (*angle > 2.0 * M_PI)
 		*angle -= 2.0 * M_PI;
-	if (*angle < 0)
+	if (*angle < 0.)
 		*angle += 2.0 * M_PI;
 }
 
@@ -49,7 +49,7 @@ int		exit_game(t_mlx *m)
 
 int		key_press(int keycode, void *param)
 {
-	t_mlx 		*m;
+	t_mlx		*m;
 	double		coeff;
 
 	m = (t_mlx *)param;
@@ -76,7 +76,7 @@ int		key_press(int keycode, void *param)
 
 int		game_loop(void *param)
 {
-	t_mlx 		*m;
+	t_mlx		*m;
 
 	m = (t_mlx *)param;
 	minimap(m);

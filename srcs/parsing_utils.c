@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 17:50:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/16 15:15:59 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 12:00:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			check_char_map(char c)
 	return (0);
 }
 
-void	ft_swap(int *color)
+void		ft_swap(int *color)
 {
 	int		tmp;
 

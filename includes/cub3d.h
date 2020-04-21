@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 17:49:32 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 11:22:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void			set_color(t_mlx *m);
 int				ft_init_mlx(t_mlx *m);
 void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
+char			*get_pixel_texture(t_img *texture, t_pos coord);
+void			select_texture(t_img **texture, t_mlx *m);
 
 #endif

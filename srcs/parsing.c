@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/10 12:17:28 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 12:15:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_realloc(int *nbr_line, char ***map, char *line)
 	int		i;
 
 	if (!(tmp = malloc(sizeof(char *) * (*nbr_line + 1))))
-		return;
+		return ;
 	i = 0;
 	while (i < *nbr_line)
 	{
@@ -73,8 +73,8 @@ void		clean_num(char *line, int id, int **res)
 		i++;
 	if ((id == 0 && i == 3) || (id == 1 && i == 4))
 	{
-		if(!(*res = malloc(sizeof(int *) * i)))
-			return;
+		if (!(*res = malloc(sizeof(int *) * i)))
+			return ;
 		while (j < i - 1)
 		{
 			(*res)[j] = ft_atoi(stock[j + 1]);

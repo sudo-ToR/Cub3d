@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 12:18:41 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 17:50:48 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 11:50:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 t_img			*create_new_img(t_mlx *m, t_img *ptr, int width, int height);
 void			draw_pixel(t_img *ref, t_pos pos, char color[3]);
 void			draw_pixel_hex(t_img *ref, t_pos pos, unsigned int hexcolor);
-void			draw_square(t_img *ptr, int i, int j, unsigned int color, int width);
+void			draw_square(t_img *ptr, t_pos coord, unsigned int color, int width);
 void			minimap(t_mlx *m);
 int				draw_minimap(t_mlx m);
 void			draw_column(double distance, t_mlx *m, int column_nbr);

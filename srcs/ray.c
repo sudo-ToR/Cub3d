@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/03/12 20:08:29 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/04/21 12:04:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 		{
 			m->coord_vert.y = coord.x + m->pl.x;
 			m->coord_vert.x = coord.y + m->pl.y;
-			draw_pixel_hex(&m->minimap, (t_pos){(coord.x  + m->pl.x) * 16, (coord.y + m->pl.y) * 16}, 0xffff0000);
+			draw_pixel_hex(&m->minimap, (t_pos){(coord.x + m->pl.x) * 16,
+				(coord.y + m->pl.y) * 16}, 0xffff0000);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
 		coord.x += (double)dec;
@@ -56,7 +57,8 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 		{
 			m->coord_hor.x = coord.x + m->pl.x;
 			m->coord_hor.y = coord.y + m->pl.y;
-			draw_pixel_hex(&m->minimap, (t_pos){ (coord.x  + m->pl.x)* 16.0,  (coord.y + m->pl.y) * 16.0}, 0xffffffff);
+			draw_pixel_hex(&m->minimap, (t_pos){(coord.x + m->pl.x) * 16.0,
+				(coord.y + m->pl.y) * 16.0}, 0xffffffff);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
 		coord.y += dec;
@@ -74,7 +76,7 @@ void		draw_image(double cam_angle, t_mlx *m)
 
 	if (cam_angle < M_PI / 6.0)
 		cam_angle += 2.0 * M_PI;
-	angle = - (M_PI / 6.0) + cam_angle;
+	angle = -(M_PI / 6.0) + cam_angle;
 	var_angle = M_PI / 3. / m->p.r[0];
 	i = 0;
 	while (angle <= M_PI / 6. + cam_angle && i < m->p.r[0])
@@ -96,7 +98,7 @@ double		get_distance(double angle, t_mlx *m)
 	t_pos		coord;
 
 	coord = (t_pos) {0, 0};
-	coeff =  tan(angle);
+	coeff = tan(angle);
 	inc.x = (angle >= M_PI_2 && angle <= 3. * M_PI_2) ? -1 : 1;
 	inc.y = (angle >= M_PI && angle <= 2. * M_PI) ? -1 : 1;
 	distance.x = check_vert(m, coeff, inc.x) * cos(m->cam_angle - angle);
