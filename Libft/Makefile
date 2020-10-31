@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/02/28 14:07:47 by lnoirot          ###   ########.fr        #
+#    Updated: 2020/05/03 18:51:07 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ NAME	= libft.a
 GNL_PATH =	./gnl
 IS_PATH =	./is_something
 STR_PATH =	./str
-AFF_PAH =	./affichage
+AFF_PAH =	./put
 MEM_PATH =	./mem
 MATHS_PATH =	./maths
+LIST_PATH =		./list
 
 SRCS	=	$(GNL_PATH)/get_next_line.c \
 		$(GNL_PATH)/get_next_line_utils.c \
@@ -57,7 +58,15 @@ SRCS	=	$(GNL_PATH)/get_next_line.c \
 		$(AFF_PAH)/ft_putstr_fd.c \
 		$(AFF_PAH)/ft_putendl_fd.c \
 		$(AFF_PAH)/ft_putnbr_fd.c \
-		$(STR_PATH)/ft_strcmp.c
+		$(STR_PATH)/ft_strcmp.c \
+		$(LIST_PATH)/ft_lstnew.c \
+		$(LIST_PATH)/ft_lstadd_front.c \
+		$(LIST_PATH)/ft_lstlast.c \
+		$(LIST_PATH)/ft_lstsize.c \
+		$(LIST_PATH)/ft_lstadd_back.c \
+		$(LIST_PATH)/ft_lstdelone.c \
+		$(LIST_PATH)/ft_lstclear.c \
+		$(LIST_PATH)/ft_lstiter.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -71,7 +80,7 @@ CFLAGS	= -Wall -Wextra -Werror -g3  -Iincludes
 
 all :		$(NAME)
 
-$(NAME):	$(OBJS) 
+$(NAME):	$(OBJS)
 			ar rc $(NAME) $(OBJS)
 			make -C ./ft_printf
 

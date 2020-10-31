@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   converter_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 16:40:14 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/11 18:12:05 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/05/01 16:33:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void		ft_converter_s_pt1(char **tmp, va_list ap, t_flag *stock)
 	*tmp = va_arg(ap, char *);
 	if (*tmp == NULL)
 		*tmp = "(null)";
-	if ((stock->width < (int)ft_strlen(*tmp) && (!(stock->width) && !(stock->flag)))
+	if ((stock->width < (int)ft_strlen(*tmp) && (!(stock->width)
+		&& !(stock->flag)))
 			|| stock->width > (int)ft_strlen(*tmp))
 		stock->width = (int)ft_strlen(*tmp);
 	if (stock->width < 0)

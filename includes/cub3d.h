@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/04/21 11:22:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:58:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 # include "parsing.h"
+#include "../Libft/libft.h"
 
 # define X11_KEY_PRESS          2
 # define X11_KEY_PRESS_M        1
@@ -61,6 +62,12 @@ typedef	struct		s_ray
 	t_pos_fl	wall_coord;
 }					t_ray;
 
+typedef struct			s_sprites
+{
+	t_pos_fl			coord;
+	double				distance;
+}						t_sprites;
+
 typedef struct		s_mlx
 {
 	void		*mlx_ptr;
@@ -73,6 +80,7 @@ typedef struct		s_mlx
 	t_img		so_text;
 	t_img		ea_text;
 	t_img		we_text;
+	t_img		s_text;
 	t_ray		ray;
 	t_pos_fl	coord_vert;
 	t_pos_fl	coord_hor;
@@ -80,9 +88,12 @@ typedef struct		s_mlx
 	t_colors	colors;
 	t_pos		po;
 	t_pos_fl	pl;
+	t_list		*sprites;
 	double		cam_angle;
 	double		ray_angle;
 }					t_mlx;
+
+
 
 # include "image.h"
 
@@ -92,5 +103,6 @@ void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 char			*get_pixel_texture(t_img *texture, t_pos coord);
 void			select_texture(t_img **texture, t_mlx *m);
+void			get_sprites(t_mlx *m, t_pos_fl coord, double distance);
 
 #endif

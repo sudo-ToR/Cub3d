@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/04/21 11:20:07 by user42           ###   ########.fr        #
+#    Updated: 2020/05/18 16:16:12 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC_LIST =	main.c \
 			initial_param.c \
 			minimap.c \
 			ray.c \
-			textures.c
+			textures.c \
+			sprites.c
 SRCS =		$(addprefix $(SRCS_PATH), $(SRC_LIST))
 OBJS	=	$(addprefix $(OBJ_PATH), $(SRC_LIST:.c=.o))
 
@@ -59,6 +60,7 @@ clean :
 fclean : clean
 	$(LIBFT_MAKE) fclean
 	rm -f $(NAME)
+	rm -rf $(OBJ_PATH)
 
 re : 		fclean all	
 

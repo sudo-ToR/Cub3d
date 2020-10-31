@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/04/21 12:04:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/05 19:04:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 {
 	t_pos_fl coord;
 
-	if (dec == 1)
-		coord.x = floor(m->pl.x + dec) - m->pl.x + 0.000001;
-	else
-		coord.x = -(((double)m->pl.x - floor(m->pl.x)) + 0.000001);
+	coord.x = (dec == 1) ? floor(m->pl.x + dec) - m->pl.x + 0.000001
+		: -(((double)m->pl.x - floor(m->pl.x)) + 0.000001);
 	coord.y = coeff * coord.x;
 	while (coord.x + m->pl.x < m->p.width && coord.y + m->pl.y < m->p.height)
 	{
@@ -34,6 +32,9 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 				(coord.y + m->pl.y) * 16}, 0xffff0000);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
+		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '2')
+			get_sprites(m, (t_pos_fl){coord.x + m->pl.x, coord.y + m->pl.y},
+				sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		coord.x += (double)dec;
 		coord.y = coeff * coord.x;
 	}
@@ -44,10 +45,8 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 {
 	t_pos_fl coord;
 
-	if (dec == 1)
-		coord.y = floor(m->pl.y + dec) - m->pl.y + 0.000001;
-	else
-		coord.y = (m->pl.y - floor(m->pl.y) + 0.000001) * (double)dec;
+	coord.y = (dec == 1) ? floor(m->pl.y + dec) - m->pl.y + 0.000001
+		: (m->pl.y - floor(m->pl.y) + 0.000001) * (double)dec;
 	coord.x = coord.y / coeff;
 	while (coord.y + m->pl.y < m->p.height && coord.x + m->pl.x < m->p.width)
 	{
@@ -61,6 +60,9 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 				(coord.y + m->pl.y) * 16.0}, 0xffffffff);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
+		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '2')
+			get_sprites(m, (t_pos_fl){coord.x + m->pl.x, coord.y + m->pl.y},
+				sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		coord.y += dec;
 		coord.x = coord.y / coeff;
 	}

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/04/21 12:13:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:36:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int		game_loop(void *param)
 	t_mlx		*m;
 
 	m = (t_mlx *)param;
-	minimap(m);
+	if (m->aff_minimap)
+		minimap(m);
 	draw_image(m->cam_angle, m);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
 	if (m->aff_minimap)
@@ -102,6 +103,8 @@ int		ft_init_mlx(t_mlx *m)
 	if (!(create_text(m, &m->we_text, m->p.we)))
 		return (1);
 	if (!(create_text(m, &m->ea_text, m->p.ea)))
+		return (1);
+	if (!(create_text(m, &m->s_text, m->p.s)))
 		return (1);
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	if (!create_new_img(m, &m->render, m->p.r[0], m->p.r[1]))
