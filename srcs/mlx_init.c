@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/10/31 16:57:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/31 19:42:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		ft_init_mlx(t_mlx *m)
 	get_initial_position(&v, m->p, &m->pl);
 	init_dir_vector(v, &m->cam_angle);
 	m->mlx_ptr = mlx_init();
+	m->sprites = NULL;
 	if (!(create_text(m, &m->no_text, m->p.no)))
 		return (1);
 	if (!(create_text(m, &m->so_text, m->p.so)))
