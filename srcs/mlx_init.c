@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/05/18 16:36:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/31 16:55:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		exit_game(t_mlx *m)
 	mlx_destroy_image(m->mlx_ptr, m->ea_text.ref);
 	mlx_destroy_image(m->mlx_ptr, m->we_text.ref);
 	m->mlx_ptr = NULL;
-	return (0);
+	exit (0);
 }
 
 int		key_press(int keycode, void *param)
@@ -55,22 +55,22 @@ int		key_press(int keycode, void *param)
 	m = (t_mlx *)param;
 	adjust_cam_angle(&m->cam_angle);
 	coeff = tan(m->cam_angle);
-	if (keycode == 109)
+	if (keycode == M)
 		m->aff_minimap = (m->aff_minimap) ? 0 : 1;
-	if (keycode == 100)
+	if (keycode == ARR_RIGHT)
 		m->cam_angle += 0.1;
-	if (keycode == 97)
+	if (keycode == ARR_LEFT)
 		m->cam_angle -= 0.1;
-	if (keycode == 65362 || keycode == 119)
+	if (keycode == W || keycode == ARR_UP)
 		move((t_pos_fl) {0.1, -0.1}, m, M_PI_2);
-	if (keycode == 65364 || keycode == 115)
+	if (keycode == S || keycode == ARR_DOWN)
 		move((t_pos_fl) {-0.1, 0.1}, m, M_PI_2);
-	if (keycode == 65363)
+	if (keycode == D)
 		move((t_pos_fl) {-0.1, 0.1}, m, 0.);
-	if (keycode == 65361)
+	if (keycode == A)
 		move((t_pos_fl) {0.1, -0.1}, m, 0.);
-	if (keycode == 65307 || keycode == 113)
-		exit(exit_game(m));
+	if (keycode == ESC || keycode == Q)
+		exit_game(m);
 	return (0);
 }
 
@@ -112,6 +112,7 @@ int		ft_init_mlx(t_mlx *m)
 	if (!create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16))
 		return (1);
 	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
+	mlx_hook(m->win_ptr, 17, 0, exit_game, m);
 	mlx_loop_hook(m->mlx_ptr, game_loop, m);
 	mlx_loop(m->mlx_ptr);
 	return (0);

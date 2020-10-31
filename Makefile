@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/05/18 16:16:12 by user42           ###   ########.fr        #
+#    Updated: 2020/10/31 16:55:33 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@
 NAME	=	Cub3D 
 CC		= 	clang
 CFLAGS	= 	-Wall -Wextra -Werror -g3 $(INCLUDES)
-LIBS	=  -L./mlx -lmlx -lbsd -lm -lXext -lX11
+# LIBS	=  -L./mlx -lmlx -lbsd -lm -lXext -lX11
+LIBS	= -lmlx -L$(LIBFT_PATH) -lft -framework OpenGL -framework Appkit
 
 LIBFT_PATH = ./Libft
 OBJ_PATH =	./obj/
@@ -23,6 +24,9 @@ LIBFT_MAKE = @$(MAKE) -C $(LIBFT_PATH)
 LIBFT_INC = -I $(LIBFT_PATH)
 LIBFT_LIB = -L$(LIBFT_PATH) -lft
 FT_PRINTF_LIB = -L$(LIBFT_PATH)/ft_printf -lftprintf
+# MLX_PATH = ./mlx
+# MLX_PATH = ./mlx
+# MLX_MAKE = @$(MAKE) -C $(MLX_PATH) 
 INCLUDES =  $(LIBFT_INC) -I$(LIBFT_PATH) -I./includes
 
 SRCS_PATH = srcs
@@ -43,6 +47,7 @@ OBJS	=	$(addprefix $(OBJ_PATH), $(SRC_LIST:.c=.o))
 
 all :		libft
 			@mkdir -p ./obj
+			$(LIBFT_MAKE)
 			@$(MAKE) $(NAME)
 
 $(NAME):	$(OBJS)
