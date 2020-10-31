@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/10/31 16:55:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/31 17:02:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,29 @@
 # define X11_KEY_RELEASE        3
 # define X11_KEY_RELEASE_M      2
 
-# define W 13
-# define ARR_UP 126
-# define S 1
-# define ARR_DOWN 125
-# define D 2
-# define A 0
-# define ARR_RIGHT 124
-# define ARR_LEFT 123
-# define ESC 53
-# define Q 12
-# define M 46
+// # define W 13
+// # define ARR_UP 126
+// # define S 1
+// # define ARR_DOWN 125
+// # define D 2
+// # define A 0
+// # define ARR_RIGHT 124
+// # define ARR_LEFT 123
+// # define ESC 53
+// # define Q 12
+// # define M 46
 
-//# define W 65362
-// # define ARR_UP 119
-// # define S 65364
-// # define ARR_DOWN 115
-// # define D 65363
-// # define A 65361
-// # define ARR_RIGHT 100
-// # define ARR_LEFT 97
-// # define ESC 65307
-// # define Q 113
-// # define M 109
+# define W 65362
+# define ARR_UP 119
+# define S 65364
+# define ARR_DOWN 115
+# define D 65363
+# define A 65361
+# define ARR_RIGHT 100
+# define ARR_LEFT 97
+# define ESC 65307
+# define Q 113
+# define M 109
 
 
 typedef struct		s_img

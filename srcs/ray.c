@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/05/05 19:04:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/31 17:00:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ double		check_vert(t_mlx *m, double coeff, int dec)
 				(coord.y + m->pl.y) * 16}, 0xffff0000);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
-		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '2')
-			get_sprites(m, (t_pos_fl){coord.x + m->pl.x, coord.y + m->pl.y},
-				sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		coord.x += (double)dec;
 		coord.y = coeff * coord.x;
 	}
@@ -60,9 +57,6 @@ double		check_hor(t_mlx *m, double coeff, int dec)
 				(coord.y + m->pl.y) * 16.0}, 0xffffffff);
 			return (sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		}
-		if (m->p.map[(int)(coord.y + m->pl.y)][(int)(coord.x + m->pl.x)] == '2')
-			get_sprites(m, (t_pos_fl){coord.x + m->pl.x, coord.y + m->pl.y},
-				sqrt(pow(coord.y, 2) + pow(coord.x, 2)));
 		coord.y += dec;
 		coord.x = coord.y / coeff;
 	}
