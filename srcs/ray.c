@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/10/31 23:31:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 13:54:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ void		add_sprites(t_pos_fl coord, t_mlx *m)
 	tmp = create_sprite(coord, m->pl);
 	cursor = m->sprites;
 	previous = NULL;
-	if (!(m->sprites))
-	{
-		ft_lstadd_front(&m->sprites, ft_lstnew(tmp));
-		return;
-	}
-	cast = (t_sprites *)(cursor->content);
+	cast = (cursor) ? (t_sprites *)(cursor->content) : NULL;
 	while (cursor && cast->distance >= tmp->distance)
 	{
 		cast = (t_sprites *)(cursor->content);
@@ -53,14 +48,14 @@ void		add_sprites(t_pos_fl coord, t_mlx *m)
 		previous = cursor;
 		cursor = cursor->next;
 	}
-	if (!previous)
-		ft_lstadd_front(&m->sprites, ft_lstnew(tmp));
-	else
+	if (!previous || !(m->sprites))
 	{
+		ft_lstadd_front(&m->sprites, ft_lstnew(tmp));
+		return;
+	}
 		sprites_to_insert = ft_lstnew(tmp);
 		previous->next = sprites_to_insert;
-		sprites_to_insert->next = cursor;
-	}	
+		sprites_to_insert->next = cursor;	
 }
 
 double		check_vert(t_mlx *m, double coeff, int dec)
