@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:23:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/01 14:42:10 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 19:52:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_sprites	*create_sprite(t_pos_fl coord, t_pos_fl pl)
 		return (0);
 	new->coord.x = (int)(coord.x + pl.x) + 0.5;
 	new->coord.y = (int)(coord.y + pl.y) + 0.5;
-	new->distance = sqrt(pow(new->coord.y, 2) + pow(new->coord.x, 2));
+	new->distance = sqrt(pow(coord.x + 0.5, 2) + pow(coord.y + 0.5, 2));
 	return (new);
 }
 

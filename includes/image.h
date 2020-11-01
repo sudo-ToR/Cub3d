@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 12:18:41 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/05/03 18:50:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 16:27:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			draw_square(t_img *ptr, t_pos coord, unsigned int color, int width);
 void			minimap(t_mlx *m);
 int				draw_minimap(t_mlx m);
 void			draw_column(double distance, t_mlx *m, int column_nbr);
-
+void			draw_wall(t_img *render, t_pos pixel, t_mlx *m, double heigth);
 double			check_vert(t_mlx *m, double coeff, int dec);
 double			check_hor(t_mlx *m, double coeff, int dec);
 double			get_distance(double angle, t_mlx *m);
