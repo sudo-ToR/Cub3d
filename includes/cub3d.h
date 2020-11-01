@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/10/31 18:31:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 14:33:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 # include "parsing.h"
-#include "../Libft/libft.h"
+# include "../Libft/libft.h"
+# include <float.h>
+# include "structures.h"
+# include "image.h"
+# include "sprites.h"
 
 # define X11_KEY_PRESS          2
 # define X11_KEY_PRESS_M        1
@@ -48,85 +52,11 @@
 # define M 109
 
 
-typedef struct		s_img
-{
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	char	*img;
-	void	*ref;
-	int		w;
-	int		h;
-	int		x;
-	int		y;
-}					t_img;
-
-typedef struct		s_colors
-{
-	char floor[3];
-	char ceil[3];
-}					t_colors;
-
-typedef struct		s_pos
-{
-	int x;
-	int y;
-}					t_pos;
-
-typedef struct		s_pos_fl
-{
-	double x;
-	double y;
-}					t_pos_fl;
-
-typedef	struct		s_ray
-{
-	t_pos_fl	coord;
-	int			dir_wall;
-	t_pos_fl	wall_coord;
-}					t_ray;
-
-typedef struct			s_sprites
-{
-	t_pos_fl			coord;
-	double				distance;
-}						t_sprites;
-
-typedef struct		s_mlx
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	t_img		minimap;
-	int			aff_minimap;
-	t_img		render;
-	t_img		no_text;
-	t_img		so_text;
-	t_img		ea_text;
-	t_img		we_text;
-	t_img		s_text;
-	t_ray		ray;
-	t_pos_fl	coord_vert;
-	t_pos_fl	coord_hor;
-	t_pars		p;
-	t_colors	colors;
-	t_pos		po;
-	t_pos_fl	pl;
-	t_list		*sprites;
-	double		cam_angle;
-	double		ray_angle;
-}					t_mlx;
-
-
-
-# include "image.h"
-
 void			set_color(t_mlx *m);
 int				ft_init_mlx(t_mlx *m);
 void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 char			*get_pixel_texture(t_img *texture, t_pos coord);
 void			select_texture(t_img **texture, t_mlx *m);
-void			get_sprites(t_mlx *m, t_pos_fl coord, double distance);
 
 #endif
