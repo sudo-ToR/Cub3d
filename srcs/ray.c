@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/01 21:32:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 22:59:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,27 @@ void		draw_image(double cam_angle, t_mlx *m)
 	while (cursor)
 	{
 		cast = (t_sprites *)cursor->content;
-		dist_sprites = cast->distance * cos(m->cam_angle - atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x)));
+		dist_sprites = cast->distance;
 		heigth = (double)(m->p.r[1]) / dist_sprites;
 		width = (double)m->s_text.w * heigth / (double)m->s_text.h;
-		beg_end.x = (m->cam_angle - atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * m->p.r[0] / (M_PI / 3.) - (width / 2.);
-		beg_end.y = (m->cam_angle - atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * m->p.r[0] / (M_PI / 3.) + (width / 2.);
-		beg_end.x = atan((cast->coord.y - 2. * m->pl.y) / (cast->coord.x - 2. * m->pl.x)) * (m->p.r[0] / (M_PI * 3.)) - (width / 2.);
-		beg_end.y = atan((cast->coord.y - 2. * m->pl.y) / (cast->coord.x - 2. * m->pl.x)) * (m->p.r[0] / (M_PI * 3.)) + (width / 2.);
+		beg_end.x = (m->cam_angle - (M_PI / 6.) + atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * (m->p.r[0] / (M_PI * 3.)) - (width / 2.);
+		beg_end.y = (m->cam_angle - (M_PI / 6.) + atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * (m->p.r[0] / (M_PI * 3.)) + (width / 2.);
 		sp_coord.y = (double)(m->p.r[1] / 2.) + (heigth / 2.);
 		sp_coord.x = (double)(m->p.r[1] / 2.) - (heigth / 2.); 
 		tmp = sp_coord.x;
-		pixel.x = (int) beg_end.x;
-		while (pixel.x < (int)beg_end.y)
+		pixel.y = (int) beg_end.x;
+		while (pixel.y < (int)beg_end.y)
 		{
-			while (sp_coord.x < sp_coord.y && pixel.x >= 0 && pixel.x <= m->p.r[0])
+			while (sp_coord.x < sp_coord.y && pixel.y >= 0 && pixel.y <= m->p.r[0])
 			{
 				if (sp_coord.x > m->p.r[1] && sp_coord.x < 0)
 					break;
-				pixel.y = (int)sp_coord.x;
+				pixel.x = (int)sp_coord.x;
 				draw_pixel_hex(&m->render, pixel, 0xffffff);
 				sp_coord.x += 1.;
 			}
 			sp_coord.x = tmp;
-			pixel.x += 1.;
+			pixel.y += 1.;
 		}
 		cursor = cursor->next;
 	}
