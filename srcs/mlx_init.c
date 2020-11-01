@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/10/31 23:36:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/01 15:01:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ int		game_loop(void *param)
 	t_mlx		*m;
 
 	m = (t_mlx *)param;
-	if (m->aff_minimap)
-		minimap(m);
+	minimap(m);
 	draw_image(m->cam_angle, m);
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
 	if (m->aff_minimap)
