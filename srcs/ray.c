@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/02 19:51:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/02 22:58:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,61 +89,50 @@ void		draw_image(double cam_angle, t_mlx *m)
 	}
 	t_list		*cursor;
 	t_sprites	*cast;
+	t_pos_fl	column;
+	t_pos_fl	lines;
 	double		dist_sprites;
+	double		heigth;
+	double		width;
+	double		tmp;
+	double		tmp_bis;
+	char		*color;
 
 	cursor = m->sprites;
-	cast = (t_sprites *)cursor->content;
-	fflush(stdout);
 	while(cursor)
 	{
 		cast = (t_sprites *)cursor->content;
 		dist_sprites = cast->distance * cos(cast->angle);
-		printf("%f\n", dist_sprites);
+		heigth = (double)(m->p.r[1]) / dist_sprites;
+		width = (double)m->s_text.w * heigth / (double)m->s_text.h;
+		column.x = (cast->angle + (M_PI / 6.)) * (m->p.r[0] / (M_PI / 3.)) - (width / 2.);
+		column.y = (cast->angle + (M_PI / 6.)) * (m->p.r[0] / (M_PI / 3.)) + (width / 2.);
+		lines.x = (double)(m->p.r[1] / 2.) - (heigth / 2.);
+		lines.y = (double)(m->p.r[1] / 2.) + (heigth / 2.);
+		tmp = lines.x;
+		tmp_bis = column.x;
+		while (column.x < column.y)
+		{
+			while (lines.x < lines.y && column.x >= 0 && column.x < m->p.r[0])
+			{
+				if (lines.x >= 0 && lines.x < m->p.r[1])
+				{
+					t_pos coord_text;
+
+					coord_text.x = (column.x - tmp_bis) * (m->s_text.h / heigth);
+					coord_text.y = (lines.x - tmp) * (m->s_text.w / width);
+					color = get_pixel_texture(&m->s_text, coord_text);
+					if (color[0] && color[1] && color[2] && color[3])
+						draw_pixel(&m->render, (t_pos){column.x, lines.x}, color);
+				}
+				lines.x+= 1.;
+			}
+			column.x += 1.;
+			lines.x = tmp;
+		}
 		cursor = cursor->next;
 	}
-
 	ft_lstclear(&m->sprites, free);
-	// double 		dist_sprites;
-	// double		heigth;
-	// double		width;
-	// t_list		*cursor;
-	// t_sprites	*cast;
-	// t_pos_fl	beg_end;
-	// t_pos_fl	sp_coord;
-	// t_pos		pixel;
-	// double		tmp;
-	
-	// cursor = m->sprites;
-	// while (cursor)
-	// {
-	// 	cast = (t_sprites *)cursor->content;
-	// 	dist_sprites = cast->distance;
-	// 	heigth = (double)(m->p.r[1]) / dist_sprites;
-	// 	width = (double)m->s_text.w * heigth / (double)m->s_text.h;
-	// 	beg_end.x = (m->cam_angle - (M_PI / 6.) + atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * (m->p.r[0] / (M_PI / 3.)) - (width / 2.);
-	// 	beg_end.y = (m->cam_angle - (M_PI / 6.) + atan((cast->coord.y - m->pl.y) / (cast->coord.x - m->pl.x))) * (m->p.r[0] / (M_PI / 3.)) + (width / 2.);
-	// 	sp_coord.y = (double)(m->p.r[1] / 2.) + (heigth / 2.);
-	// 	sp_coord.x = (double)(m->p.r[1] / 2.) - (heigth / 2.); 
-	// 	tmp = sp_coord.x;
-	// 	pixel.y = (int) beg_end.x;
-	// 	while (pixel.y < (int)beg_end.y)
-	// 	{
-	// 		while (sp_coord.x < sp_coord.y && pixel.y >= 0 && pixel.y <= m->p.r[0])
-	// 		{
-	// 			if (sp_coord.x > m->p.r[1] && sp_coord.x < 0)
-	// 				break;
-	// 			pixel.x = (int)sp_coord.x;
-	// 			draw_pixel_hex(&m->render, pixel, 0xffffff);
-	// 			sp_coord.x += 1.;
-	// 		}
-	// 		sp_coord.x = tmp;
-	// 		pixel.y += 1.;
-	// 	}
-	// 	cursor = cursor->next;
-	// }
-	
-
-	
 }
 
 double		get_distance(double angle, t_mlx *m)
