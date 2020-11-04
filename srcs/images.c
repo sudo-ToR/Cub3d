@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 20:01:40 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/01 15:39:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/03 16:18:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ void	draw_pixel(t_img *ref, t_pos pos, char color[3])
 	ref->img[index] = color[0];
 	ref->img[index + 1] = color[1];
 	ref->img[index + 2] = color[2];
-	// int calcul;
-	// unsigned int c;
-	// calcul = pos.y * ref->w + pos.x;
-	// c = (color[0] << 16) | (color[1] << 8) | (color[2]);
-	// ((unsigned int *)ref->img)[calcul] = c;
 }
 
 void	draw_pixel_hex(t_img *ref, t_pos pos, unsigned int hexcolor)

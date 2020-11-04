@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:29:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/02 18:09:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/03 15:49:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef struct			s_sprites
 	double				distance;
 	double				angle;
 }						t_sprites;
+
+typedef	struct			s_coord_sprite
+{
+	t_pos_fl			column;
+	t_pos_fl			lines;
+}						t_coord_sprite;
 
 typedef struct		s_mlx
 {

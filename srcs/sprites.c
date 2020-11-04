@@ -6,43 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:23:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/02 19:50:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/03 16:30:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_sprites	*create_sprite(t_pos_fl coord, t_pos_fl pl, t_mlx *m)
-{
-	t_sprites	*new;
-	t_pos_fl	vec_cam;
-	t_pos_fl	vec_sp;
-
-	if (!(new = malloc(sizeof(t_sprites))))
-		return (0);
-	vec_cam.x = cos(m->cam_angle);
-	vec_cam.y = sin(m->cam_angle);
-	new->coord.x = (int)(coord.x + pl.x) + 0.5;
-	new->coord.y = (int)(coord.y + pl.y) + 0.5;
-	vec_sp.x  = new->coord.x - pl.x;
-	vec_sp.y = new->coord.y - pl.y;
-	new->distance = sqrt(pow(new->coord.x - pl.x, 2) + pow(new->coord.y - pl.y, 2));
-	new->angle = acos((vec_cam.x * vec_sp.x + vec_cam.y * vec_sp.y)
-		/ (sqrt(pow(vec_cam.x,2) + pow(vec_cam.y, 2)) * sqrt(pow(vec_sp.x,2) + pow(vec_sp.y, 2))));
-	new->angle *= (vec_cam.x * vec_sp.y - vec_cam.y * vec_sp.x >= 0) ? 1 : -1; 
-	return (new);
-}
-
-void		lst_insert(t_sprites *tmp, t_list *prev, t_list *curs)
-{
-	t_list *sprites_to_insert;
-
-	sprites_to_insert = ft_lstnew(tmp);
-	prev->next = sprites_to_insert;
-	sprites_to_insert->next = curs;
-}
-
-void		add_sprites(t_pos_fl coord, t_mlx *m)
+void	add_sprites(t_pos_fl coord, t_mlx *m)
 {
 	t_sprites	*tmp;
 	t_sprites	*cast;
@@ -68,4 +38,63 @@ void		add_sprites(t_pos_fl coord, t_mlx *m)
 		ft_lstadd_front(&m->sprites, ft_lstnew(tmp));
 	else
 		lst_insert(tmp, previous, cursor);
+}
+
+void	draw_text_sprites(t_coord_sprite sp, t_pos_fl t, t_pos_fl h_w, t_mlx *m)
+{
+	t_pos	coord_text;
+	char	*color;
+
+	coord_text.x = (sp.column.x - t.y) * (m->s_text.h / h_w.x);
+	coord_text.y = (sp.lines.x - t.x) * (m->s_text.w / h_w.y);
+	color = get_pixel_texture(&m->s_text, coord_text);
+	if (color[0] && color[1] && color[2] && color[3])
+		draw_pixel(&m->render, (t_pos){sp.column.x, sp.lines.x}, color);
+}
+
+void	calc_sp(t_sprites *c, t_coord_sprite *h_t, t_coord_sprite *s, t_mlx *m)
+{
+	double		dist_sprites;
+
+	dist_sprites = c->distance * cos(c->angle);
+	h_t->column.x = (double)(m->p.r[1]) / dist_sprites;
+	h_t->column.y = (double)m->s_text.w *
+		h_t->column.x / (double)m->s_text.h;
+	s->column.x = (c->angle + (M_PI / 6.)) *
+		(m->p.r[0] / (M_PI / 3.)) - (h_t->column.y / 2.);
+	s->column.y = (c->angle + (M_PI / 6.)) *
+		(m->p.r[0] / (M_PI / 3.)) + (h_t->column.y / 2.);
+	s->lines.x = (double)(m->p.r[1] / 2.) - (h_t->column.x / 2.);
+	s->lines.y = (double)(m->p.r[1] / 2.) + (h_t->column.x / 2.);
+	h_t->lines.x = s->lines.x;
+	h_t->lines.y = s->column.x;
+}
+
+void	draw_sprites(t_mlx *m)
+{
+	t_list			*cursor;
+	t_sprites		*cast;
+	t_coord_sprite	sp;
+	t_coord_sprite	hw_tmp;
+
+	cursor = m->sprites;
+	while (cursor)
+	{
+		cast = (t_sprites *)cursor->content;
+		calc_sp(cast, &hw_tmp, &sp, m);
+		while (sp.column.x < sp.column.y)
+		{
+			while (sp.lines.x < sp.lines.y && sp.column.x >= 0
+				&& sp.column.x < m->p.r[0])
+			{
+				if (sp.lines.x >= 0 && sp.lines.x < m->p.r[1])
+					draw_text_sprites(sp, hw_tmp.lines, hw_tmp.column, m);
+				sp.lines.x += 1.;
+			}
+			sp.column.x += 1.;
+			sp.lines.x = hw_tmp.lines.x;
+		}
+		cursor = cursor->next;
+	}
+	ft_lstclear(&m->sprites, free);
 }

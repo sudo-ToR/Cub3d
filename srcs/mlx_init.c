@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/01 16:45:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/03 16:20:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		exit_game(t_mlx *m)
 	mlx_destroy_image(m->mlx_ptr, m->ea_text.ref);
 	mlx_destroy_image(m->mlx_ptr, m->we_text.ref);
 	m->mlx_ptr = NULL;
-	exit (0);
+	exit(0);
 }
 
 int		key_press(int keycode, void *param)
