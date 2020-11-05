@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/03 16:20:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/04 21:33:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		game_loop(void *param)
 	m = (t_mlx *)param;
 	minimap(m);
 	draw_image(m->cam_angle, m);
+	m->distance.i = 0;
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->render.ref, 0, 0);
 	if (m->aff_minimap)
 		mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->minimap.ref, 25, 25);
@@ -94,6 +95,9 @@ int		ft_init_mlx(t_mlx *m)
 	set_color(m);
 	get_initial_position(&v, m->p, &m->pl);
 	init_dir_vector(v, &m->cam_angle);
+	if (!(m->distance.distance = malloc(sizeof(double) * m->p.r[0])))
+		return (1);
+	m->distance.i = 0;
 	m->mlx_ptr = mlx_init();
 	m->sprites = NULL;
 	if (!(create_text(m, &m->no_text, m->p.no)))

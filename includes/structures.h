@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:29:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/03 15:49:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/04 21:03:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef	struct			s_coord_sprite
 	t_pos_fl			lines;
 }						t_coord_sprite;
 
+typedef	struct				s_wall_dist
+{
+	double				*distance;
+	int					i;
+
+}						t_wall_dis;
+
 typedef struct		s_mlx
 {
 	void		*mlx_ptr;
@@ -88,6 +95,7 @@ typedef struct		s_mlx
 	t_list		*sprites;
 	double		cam_angle;
 	double		ray_angle;
+	t_wall_dis	distance;
 }					t_mlx;
 
 #endif

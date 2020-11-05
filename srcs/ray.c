@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:50:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/03 16:18:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/05 13:38:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,7 @@ double		get_distance(double angle, t_mlx *m)
 		m->ray.coord = (t_pos_fl)m->coord_vert;
 		m->ray.dir_wall = 1;
 	}
+	m->distance.distance[m->distance.i] = fmin(distance.x, distance.y);
+	m->distance.i++;
 	return (fmin(distance.x, distance.y));
 }
