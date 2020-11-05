@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:23:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 14:19:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/05 19:32:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	add_sprites(t_pos_fl coord, t_mlx *m)
 	t_list		*cursor;
 	t_list		*previous;
 
-	tmp = create_sprite(coord, m->pl, m);
+	if (!(tmp = create_sprite(coord, m->pl, m)))
+		return ;
 	cursor = m->sprites;
 	previous = NULL;
 	cast = (cursor) ? (t_sprites *)(cursor->content) : NULL;
