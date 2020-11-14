@@ -6,23 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 14:23:16 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 19:32:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 21:35:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	printlst(t_list *lst){
-	t_sprites *sprite;
-
-	while (lst)
-	{
-		sprite = (t_sprites*)lst->content;
-		printf("[%.1f;%.1f] %.12f ==> ", sprite->coord.x, sprite->coord.y, sprite->distance);
-		lst = lst->next;
-	}
-	printf("NULL\n");
-}
 
 void	add_sprites(t_pos_fl coord, t_mlx *m)
 {
@@ -51,7 +39,6 @@ void	add_sprites(t_pos_fl coord, t_mlx *m)
 		ft_lstadd_front(&m->sprites, ft_lstnew(tmp));
 	else
 		lst_insert(tmp, previous, cursor);
-	// printlst(m->sprites);
 }
 
 void	draw_text_sprites(t_coord_sprite sp, t_pos_fl t, t_pos_fl h_w, t_mlx *m)

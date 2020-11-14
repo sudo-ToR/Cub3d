@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:09:08 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 20:01:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/10 21:36:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_sprites	*create_sprite(t_pos_fl coord, t_pos_fl pl, t_mlx *m)
 		/ (sqrt(pow(vec_cam.x, 2) + pow(vec_cam.y, 2))
 			* sqrt(pow(vec_sp.x, 2) + pow(vec_sp.y, 2))));
 	new->angle *= (vec_cam.x * vec_sp.y - vec_cam.y * vec_sp.x >= 0) ? 1 : -1;
-	// printf("%f\n", new->angle);
 	if (fabs(new->angle) > 1.)
 		new = NULL;
 	return (new);
