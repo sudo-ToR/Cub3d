@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/04 21:33:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/15 19:02:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,15 @@ int		game_loop(void *param)
 	return (1);
 }
 
+void	loop_win(t_mlx *m)
+{
+	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
+	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
+	mlx_hook(m->win_ptr, 17, 0, exit_game, m);
+	mlx_loop_hook(m->mlx_ptr, game_loop, m);
+	mlx_loop(m->mlx_ptr);
+}
+
 int		ft_init_mlx(t_mlx *m)
 {
 	char	v;
@@ -110,14 +119,9 @@ int		ft_init_mlx(t_mlx *m)
 		return (1);
 	if (!(create_text(m, &m->s_text, m->p.s)))
 		return (1);
-	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	if (!create_new_img(m, &m->render, m->p.r[0], m->p.r[1]))
 		return (1);
 	if (!create_new_img(m, &m->minimap, m->p.width * 16, m->p.height * 16))
 		return (1);
-	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
-	mlx_hook(m->win_ptr, 17, 0, exit_game, m);
-	mlx_loop_hook(m->mlx_ptr, game_loop, m);
-	mlx_loop(m->mlx_ptr);
 	return (0);
 }

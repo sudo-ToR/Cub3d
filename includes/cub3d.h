@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/01 14:33:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/15 18:25:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "structures.h"
 # include "image.h"
 # include "sprites.h"
+# include <sys/types.h>
+# include <fcntl.h>
+# include "screenshot.h"
 
 # define X11_KEY_PRESS          2
 # define X11_KEY_PRESS_M        1
@@ -58,5 +61,6 @@ void			init_dir_vector(char v, double *cam_angle);
 void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 char			*get_pixel_texture(t_img *texture, t_pos coord);
 void			select_texture(t_img **texture, t_mlx *m);
+void			loop_win(t_mlx *m);
 
 #endif

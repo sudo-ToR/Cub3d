@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/10 18:35:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/15 18:49:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,13 @@ int			main(int ac, char **av)
 		// system("leaks Cub3D");
 		return (1);
 	}
+	ft_init_mlx(&m);
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))
+	{
+		draw_image(m.cam_angle, &m);
+		make_screenshot(&m);		
 		return (ft_printf("save option\n"));
-	else
-		ft_init_mlx(&m);
+	}
+	loop_win(&m);
 	return (0);
 }

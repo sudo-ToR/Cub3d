@@ -2,6 +2,6 @@
 **.a
 **/.vscode
 **.swp
-Cub3D
+./Cub3D
 .DS_Store
-screenshot.bpm
+srcs/screenshot.bpm
