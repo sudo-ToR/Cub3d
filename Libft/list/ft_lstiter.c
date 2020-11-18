@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 16:53:13 by user42            #+#    #+#             */
-/*   Updated: 2020/05/02 17:01:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/18 20:55:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-		while (lst)
-		{
-			f((void *)lst->content);
-			lst = lst->next;
-		}
+	while (lst)
+	{
+		f((void *)lst->content);
+		lst = lst->next;
+	}
 }

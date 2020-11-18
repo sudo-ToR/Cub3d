@@ -6,19 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/15 19:02:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/18 19:46:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	adjust_cam_angle(double *angle)
-{
-	if (*angle > 2.0 * M_PI)
-		*angle -= 2.0 * M_PI;
-	if (*angle < 0.)
-		*angle += 2.0 * M_PI;
-}
 
 void	move(t_pos_fl step, t_mlx *m, double rota)
 {
@@ -31,20 +23,6 @@ void	move(t_pos_fl step, t_mlx *m, double rota)
 		m->pl.x = new_coord.x;
 		m->pl.y = new_coord.y;
 	}
-}
-
-int		exit_game(t_mlx *m)
-{
-	mlx_destroy_window(m->mlx_ptr, m->win_ptr);
-	m->win_ptr = NULL;
-	mlx_destroy_image(m->mlx_ptr, m->minimap.ref);
-	mlx_destroy_image(m->mlx_ptr, m->render.ref);
-	mlx_destroy_image(m->mlx_ptr, m->no_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->so_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->ea_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->we_text.ref);
-	m->mlx_ptr = NULL;
-	exit(0);
 }
 
 int		key_press(int keycode, void *param)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/15 18:25:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/18 20:40:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@
 # define X11_KEY_PRESS_M        1
 # define X11_KEY_RELEASE        3
 # define X11_KEY_RELEASE_M      2
-
-// # define W 13
-// # define ARR_UP 126
-// # define S 1
-// # define ARR_DOWN 125
-// # define D 2
-// # define A 0
-// # define ARR_RIGHT 124
-// # define ARR_LEFT 123
-// # define ESC 53
-// # define Q 12
-// # define M 46
-
 # define W 65362
 # define ARR_UP 119
 # define S 65364
@@ -54,7 +41,6 @@
 # define Q 113
 # define M 109
 
-
 void			set_color(t_mlx *m);
 int				ft_init_mlx(t_mlx *m);
 void			init_dir_vector(char v, double *cam_angle);
@@ -62,5 +48,7 @@ void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 char			*get_pixel_texture(t_img *texture, t_pos coord);
 void			select_texture(t_img **texture, t_mlx *m);
 void			loop_win(t_mlx *m);
+int				exit_game(t_mlx *m);
+void			adjust_cam_angle(double *angle);
 
 #endif

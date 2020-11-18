@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/15 18:49:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/18 19:42:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,12 @@ int			main(int ac, char **av)
 	if (check_argument(av[1]))
 		return (ft_printf(("First argument must be a .cub file\n")));
 	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p))
-	{
-		// system("leaks Cub3D");
 		return (1);
-	}
 	ft_init_mlx(&m);
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))
 	{
 		draw_image(m.cam_angle, &m);
-		make_screenshot(&m);		
+		make_screenshot(&m);
 		return (ft_printf("save option\n"));
 	}
 	loop_win(&m);
