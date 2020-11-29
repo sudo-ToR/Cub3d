@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/18 20:44:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/29 18:06:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@ void		clean_texture(char *line, char **texture)
 	while (res[i])
 	{
 		if (i == 1)
-			*texture = res[i];
+			*texture = ft_strdup(res[i]);
 		else if (i > 1)
-		{
 			*texture = NULL;
-			free(res[i]);
-		}
-		else
-			free(res[i]);
+		free(res[i]);
 		i++;
 	}
 	free(res);
@@ -58,6 +54,7 @@ void		clean_texture(char *line, char **texture)
 		*texture = NULL;
 	close(fd);
 }
+
 
 void		clean_num(char *line, int id, int **res)
 {
@@ -84,6 +81,7 @@ void		clean_num(char *line, int id, int **res)
 	else
 		*res = NULL;
 	free(line);
+	free_table(stock);
 	if (res && id == 1)
 		ft_swap(*res);
 }

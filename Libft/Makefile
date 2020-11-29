@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/05/03 18:51:07 by user42           ###   ########.fr        #
+#    Updated: 2020/11/29 17:43:44 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS	=	$(GNL_PATH)/get_next_line.c \
 		$(STR_PATH)/ft_split.c \
 		$(MATHS_PATH)/ft_itoa.c \
 		$(STR_PATH)/ft_strmapi.c \
+		$(STR_PATH)/free_table.c \
 		$(AFF_PAH)/ft_putchar_fd.c \
 		$(AFF_PAH)/ft_putstr_fd.c \
 		$(AFF_PAH)/ft_putendl_fd.c \
