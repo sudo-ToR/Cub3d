@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:43:35 by user42            #+#    #+#             */
-/*   Updated: 2020/11/29 18:01:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/29 18:27:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	free_struct(t_mlx *m)
 	free(m->p.we);
 	free(m->p.s);
 	free(m->p.map);
+	free(m->distance.distance);
 }
 
-int		exit_game(t_mlx *m)
+int		exit_game(t_mlx *m, int mode)
 {
-	mlx_destroy_window(m->mlx_ptr, m->win_ptr);
-	m->win_ptr = NULL;
+	if (!mode)
+		mlx_destroy_window(m->mlx_ptr, m->win_ptr);
 	mlx_destroy_image(m->mlx_ptr, m->minimap.ref);
 	mlx_destroy_image(m->mlx_ptr, m->render.ref);
 	mlx_destroy_image(m->mlx_ptr, m->no_text.ref);

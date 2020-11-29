@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/18 20:40:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/29 18:23:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			get_initial_position(char *v, t_pars p, t_pos_fl *pl);
 char			*get_pixel_texture(t_img *texture, t_pos coord);
 void			select_texture(t_img **texture, t_mlx *m);
 void			loop_win(t_mlx *m);
-int				exit_game(t_mlx *m);
+int				exit_game(t_mlx *m, int mode);
 void			adjust_cam_angle(double *angle);
 
 #endif

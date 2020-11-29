@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/18 19:42:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/29 18:24:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			main(int ac, char **av)
 	{
 		draw_image(m.cam_angle, &m);
 		make_screenshot(&m);
+		exit_game(&m, 1);
 		return (ft_printf("save option\n"));
 	}
 	loop_win(&m);

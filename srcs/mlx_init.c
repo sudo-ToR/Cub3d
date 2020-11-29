@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/18 19:46:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/29 18:24:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		key_press(int keycode, void *param)
 	if (keycode == A)
 		move((t_pos_fl) {0.1, -0.1}, m, 0.);
 	if (keycode == ESC || keycode == Q)
-		exit_game(m);
+		exit_game(m, 0);
 	return (0);
 }
 
