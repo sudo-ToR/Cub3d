@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/25 10:47:52 by lnoirot          ###   ########.fr       */
+/*   Updated: 2020/12/16 20:12:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-int		cut_space(char ***map, int nbr_line)
+void	cut_space(char ***map, int nbr_line)
 {
 	int i;
 	int j;
 
-	while (nbr_line > 0)
+	i = 0;
+	while (i > nbr_line)
 	{
-		i = 0;
 		j = 0;
-		while ((*map)[nbr_line - 1][i])
+		while ((*map)[i][j]) 
 		{
-			if (i % 2 == 0 && (*map)[nbr_line - 1][i] != ' ')
-				(*map)[nbr_line - 1][j++] = (*map)[nbr_line - 1][i];
-			if (i % 2 != 0 && (*map)[nbr_line - 1][i] != ' ')
-				return (1);
-			i++;
+			if ((*map)[i][j] == ' ' || (*map)[i][j] == '\t' || (*map)[i][j] == '\r'
+				|| (*map)[i][j] == '\v' || (*map)[i][j] == '\f')
+				(*map)[i][j] = '0';
+			j++;
 		}
-		(*map)[nbr_line - 1][j] = 0;
-		nbr_line--;
+
+		i++;
 	}
-	return (0);
 }
 
 int		check_map_border(char **map, int nbr_line, int length)
@@ -56,32 +54,29 @@ int		check_map_border(char **map, int nbr_line, int length)
 	return (cut_space(&map, nbr_line));
 }
 
-int		check_map(char **map, int nbr_line, int length)
+int		length_map(char **map, int nbr_line)
 {
 	int i;
-	int j;
-	int b;
+	int tmp;
+	int len_map;
 
 	i = 0;
-	b = 0;
+	len_map = 0;
 	while (i < nbr_line)
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (check_char_map(map[i][j]))
-				return (WRONG_MAP);
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-				b += 1;
-			j++;
-		}
-		if (j != length)
-			return (WRONG_MAP);
+		tmp = ft_strlen(map[i]);
+		len_map = (len_map < tmp) ? tmp : len_map;
 		i++;
 	}
-	if (b != 1 || check_map_border(map, nbr_line, length))
+	return (len_map);
+}
+
+int		check_map(char **map, int nbr_line, int len_map)
+{
+	if (check_char_map(map, nbr_line))
 		return (WRONG_MAP);
+	len_map = length_map(map, nbr_line);
+	cut_space(&map, nbr_line);
 	return (0);
 }
 
@@ -101,7 +96,7 @@ int		ft_check_parsing(t_pars *p, int fd)
 		return (aff_error(WRONG_C));
 	else if (!p->f || p->f[0] < 0 || p->f[1] < 0 || p->f[2] < 0)
 		return (aff_error(WRONG_F));
-	else if (!p->map || (check_map(p->map, p->height, ft_strlen(p->map[0]))))
+	else if (!p->map || (check_map(p->map, p->height, &p->width)))
 		return (aff_error(WRONG_MAP));
 	p->width = ft_strlen(p->map[0]);
 	return (0);
@@ -124,5 +119,7 @@ int		aff_error(int error)
 		return (ft_printf("incorrect floor color\n"));
 	else if (error == WRONG_MAP)
 		return (ft_printf("invalid map\n"));
+	else if (error == DUPLICATION_ARGUMENT)
+		return (ft_printf("duplication of an argument\n"));
 	return (0);
 }

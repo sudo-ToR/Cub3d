@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 17:50:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/29 18:14:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/16 11:30:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,30 @@ int			ft_clean_map(char **map, int nbr_line)
 	return (i);
 }
 
-int			check_char_map(char c)
+int			check_char_map(char **map, int nbr_line)
 {
-	if (c != '0' && c != '1' && c != '2' && c != 'N' && c != 'S' && c != 'W'
-		&& c != 'E' && c != ' ')
+	int i;
+	int j;
+	int b;
+
+	i = 0;
+	b = 0;
+	while (i < nbr_line)
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if ((map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2'
+				&& map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W'
+					&& map[i][j] != 'E') || b > 1)
+				return (1);
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+				b += 1;
+			j++;
+		}
+		i++;
+	}
+	if (b == 0)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:43:35 by user42            #+#    #+#             */
-/*   Updated: 2020/11/29 18:27:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/13 18:10:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,31 @@ void	free_struct(t_mlx *m)
 	free(m->distance.distance);
 }
 
+int		check_img_add(void *img)
+{
+	if (img)
+		return (0);
+	return (1);
+}
+
 int		exit_game(t_mlx *m, int mode)
 {
 	if (!mode)
 		mlx_destroy_window(m->mlx_ptr, m->win_ptr);
-	mlx_destroy_image(m->mlx_ptr, m->minimap.ref);
-	mlx_destroy_image(m->mlx_ptr, m->render.ref);
-	mlx_destroy_image(m->mlx_ptr, m->no_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->so_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->ea_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->we_text.ref);
-	mlx_destroy_image(m->mlx_ptr, m->s_text.ref);
+	if (!(check_img_add(m->minimap.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->minimap.ref);
+	if (!(check_img_add(m->render.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->render.ref);
+	if (!(check_img_add(m->no_text.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->no_text.ref);
+	if (!(check_img_add(m->so_text.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->so_text.ref);
+	if (!(check_img_add(m->ea_text.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->ea_text.ref);
+	if (!(check_img_add(m->we_text.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->we_text.ref);
+	if (!(check_img_add(m->s_text.ref)))
+		mlx_destroy_image(m->mlx_ptr, m->s_text.ref);
 	free(m->mlx_ptr);
 	free_struct(m);
 	exit(0);

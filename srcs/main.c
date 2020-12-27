@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/29 18:24:33 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/13 18:18:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int			main(int ac, char **av)
 		return (ft_printf(("First argument must be a .cub file\n")));
 	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p))
 		return (1);
-	ft_init_mlx(&m);
+	if (ft_init_mlx(&m))
+	{
+		ft_printf("Wrong format of textures\n");
+		exit_game(&m, 1);
+	}
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))
 	{
 		draw_image(m.cam_angle, &m);

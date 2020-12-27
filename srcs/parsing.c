@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/29 18:25:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/13 18:37:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ void		ft_realloc(int *nbr_line, char ***map, char *line)
 	*map = tmp;
 }
 
-void		clean_texture(char *line, char **texture)
+int			clean_texture(char *line, char **texture)
 {
 	char	**res;
 	int		i;
 	int		fd;
 
 	i = 0;
+	if (*texture)
+		return (1);
 	res = ft_split(line, " \f\t\n\r\v");
 	free(line);
 	while (res[i])
@@ -53,15 +55,18 @@ void		clean_texture(char *line, char **texture)
 	if ((fd = open(*texture, O_RDONLY)) == -1)
 		*texture = NULL;
 	close(fd);
+	return (0);
 }
 
 
-void		clean_num(char *line, int id, int **res)
+int			clean_num(char *line, int id, int **res)
 {
 	char	**stock;
 	int		i;
 	int		j;
-
+	
+	if (*res != NULL)
+		return (1);
 	i = 0;
 	j = 0;
 	stock = (id == 0) ? ft_split(line, " \f\t\n\r\v")
@@ -71,7 +76,7 @@ void		clean_num(char *line, int id, int **res)
 	if ((id == 0 && i == 3) || (id == 1 && i == 4))
 	{
 		if (!(*res = malloc(sizeof(int *) * i)))
-			return ;
+			return (1);
 		while (j < i - 1)
 		{
 			(*res)[j] = ft_atoi(stock[j + 1]);
@@ -84,20 +89,37 @@ void		clean_num(char *line, int id, int **res)
 	free_table(stock);
 	if (res && id == 1)
 		ft_swap(*res);
+	return (0);
 }
 
-void		get_texture(t_pars *p, char *line)
+int			get_texture(t_pars *p, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
-		clean_texture(line, &p->no);
+	{
+		if (clean_texture(line, &p->no))
+			return(aff_error(DUPLICATION_ARGUMENT));
+	}
 	else if (!ft_strncmp(line, "SO ", 3))
-		clean_texture(line, &p->so);
+	{
+		if (clean_texture(line, &p->so))
+			return(aff_error(DUPLICATION_ARGUMENT));
+	}
 	else if (!ft_strncmp(line, "S ", 2))
-		clean_texture(line, &p->s);
+	{
+		if (clean_texture(line, &p->s))
+			return(aff_error(DUPLICATION_ARGUMENT));
+	}
 	else if (!ft_strncmp(line, "WE ", 3))
-		clean_texture(line, &p->we);
+	{
+		if (clean_texture(line, &p->we))
+			return(aff_error(DUPLICATION_ARGUMENT));
+	}
 	else if (!ft_strncmp(line, "EA ", 3))
-		clean_texture(line, &p->ea);
+	{
+		if (clean_texture(line, &p->ea))
+			return(aff_error(DUPLICATION_ARGUMENT));
+	}
+	return (0);
 }
 
 int			ft_pars(int fd, t_pars *p)
@@ -105,19 +127,30 @@ int			ft_pars(int fd, t_pars *p)
 	int		ret;
 	char	*line;
 
-	ft_memset(p, 0, sizeof(t_pars));
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!line[0])
 			free(line);
 		else if (!ft_strncmp(line, "R ", 2) && !p->map)
-			clean_num(line, 0, &p->r);
+		{
+			if (clean_num(line, 0, &p->r))
+				return(aff_error(DUPLICATION_ARGUMENT));
+		}
 		else if (!ft_strncmp(line, "F ", 2) && !p->map)
-			clean_num(line, 1, &p->f);
+		{
+			if (clean_num(line, 1, &p->f))
+				return(aff_error(DUPLICATION_ARGUMENT));
+		}
 		else if (!ft_strncmp(line, "C ", 2) && !p->map)
-			clean_num(line, 1, &p->c);
+		{
+			if (clean_num(line, 1, &p->c))
+				return(aff_error(DUPLICATION_ARGUMENT));
+		}
 		else if (is_texture(line) && !p->map)
-			get_texture(p, line);
+		{
+			if (get_texture(p, line))
+				return (1);
+		}
 		else if (ft_isdigit(line[0]))
 			ft_realloc(&p->height, &p->map, line);
 		else
