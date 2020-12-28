@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 15:56:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:48:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,15 @@ int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
 
 int		ft_check_parsing(t_pars *p, int fd, t_mlx *m)
 {
-	if (p->r[0] > WIDTH_MAX)
-		p->r[0] = WIDTH_MAX;
-	if (p->r[1] > HEIGHT_MAX)
-		p->r[1] = HEIGHT_MAX;
+	int		x;
+	int		y;
+
+	m->mlx_ptr = mlx_init();
+	mlx_get_screen_size(m->mlx_ptr, &x, &y);
+	if (p->r[0] > x)
+		p->r[0] = x;
+	if (p->r[1] > y)
+		p->r[1] = y;
 	if (fd == -1)
 		return (aff_error(WRONG_PATH_CUB_FILE, m));
 	else if (!p->no || !p->so || !p->ea || !p->s || !p->we)

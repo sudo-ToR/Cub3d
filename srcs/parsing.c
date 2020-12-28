@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 15:57:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:37:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,6 @@ int			clean_num(char *line, int id, int **res)
 	return (0);
 }
 
-int			error_dupplication_text(char *line, char **text, t_mlx *m)
-{
-	if (clean_texture(line, text))
-		return (aff_error(DUPLICATION_ARGUMENT, m));
-	return (0);
-}
-
 int			get_texture(t_pars *p, char *line, t_mlx *m)
 {
 	if (!(ft_strncmp(line, "NO ", 3)))
@@ -119,20 +112,10 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 	{
 		if (!line[0])
 			free(line);
-		else if (!ft_strncmp(line, "R ", 2) && !p->map)
+		else if (ft_isnum(line))
 		{
-			if (clean_num(line, 0, &p->r))
-				return (aff_error(DUPLICATION_ARGUMENT, m));	
-		}
-		else if (!ft_strncmp(line, "F ", 2) && !p->map)
-		{
-			if (clean_num(line, 1, &p->f))
-				return (aff_error(DUPLICATION_ARGUMENT, m));
-		}
-		else if (!ft_strncmp(line, "C ", 2) && !p->map)
-		{
-			if (clean_num(line, 1, &p->c))
-				return (aff_error(DUPLICATION_ARGUMENT, m));
+			if (ft_pars_num(line, p))
+				return (aff_error(ft_pars_num(line, p), m));
 		}
 		else if ((is_texture(line)) && !(p->map))
 		{
@@ -144,8 +127,6 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 		else
 			aff_error(WRONG_ARG, m);
 	}
-	if (ret == 0 && ft_isdigit(line[0]))
-		ft_realloc(&p->height, &p->map, line);
-	p->map += ft_clean_map(p->map, p->height);
+	ft_pars_utils_map(ret, line, p);
 	return ((ret == -1) ? -1 : ft_check_parsing(p, fd, m));
 }

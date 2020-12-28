@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 15:43:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:48:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		ft_init_mlx(t_mlx *m)
 	if (!(m->distance.distance = malloc(sizeof(double) * m->p.r[0])))
 		return (1);
 	m->distance.i = 0;
-	m->mlx_ptr = mlx_init();
 	m->sprites = NULL;
 	if (!(create_text(m, &m->no_text, m->p.no)))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/27 22:44:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:51:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include "../Libft/ft_printf/ft_printf.h"
 # include <sys/errno.h>
 # include <string.h>
-
-# define WIDTH_MAX 2560
-# define HEIGHT_MAX 1440
 
 typedef struct		s_pars
 {
@@ -59,5 +56,6 @@ int					ft_clean_map(char **map, int nbr_line);
 int					check_char_map(char **map, int nbr_line);
 void				ft_swap(int *color);
 int					ft_isspace(char c);
+void				ft_realloc(int *nbr_line, char ***map, char *line);
 
 #endif

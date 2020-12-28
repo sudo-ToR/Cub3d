@@ -6,11 +6,18 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:43:35 by user42            #+#    #+#             */
-/*   Updated: 2020/12/28 15:58:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:08:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		error_dupplication_text(char *line, char **text, t_mlx *m)
+{
+	if (clean_texture(line, text))
+		return (aff_error(DUPLICATION_ARGUMENT, m));
+	return (0);
+}
 
 void	adjust_cam_angle(double *angle)
 {
