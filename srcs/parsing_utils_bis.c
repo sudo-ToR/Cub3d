@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:36:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/28 17:57:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 17:58:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			ft_pars_num(char *line, t_pars *p)
 	return (0);
 }
 
-void	cut_space(t_pars *p)
+void		cut_space(t_pars *p)
 {
 	int i;
 	int j;
