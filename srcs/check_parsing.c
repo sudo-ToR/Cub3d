@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 16:48:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 17:57:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
 	get_initial_position(&(p->start_dir), *p, &tmp);
 	flood_fill(map_tmp, tmp.x, tmp.y, m);
 	len_map = length_map(p->map, nbr_line);
+	cut_space(p);
 	free_table(map_tmp);
 	return (0);
 }
