@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/18 20:47:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/27 22:44:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_pars
 	char			**map;
 	int				width;
 	int				height;
+	char			start_dir;
 }					t_pars;
 
 typedef enum		e_parsing_error
@@ -47,18 +48,16 @@ typedef enum		e_parsing_error
 	WRONG_ARG,
 	WRONG_C,
 	WRONG_F,
-	WRONG_MAP
+	WRONG_MAP,
+	DUPLICATION_ARGUMENT
 }					t_parsing_error;
 
+int					clean_texture(char *line, char **texture);
 int					is_texture(char *line);
-void				clean_texture(char *line, char **texture);
-void				clean_num(char *line, int id, int **res);
-void				get_texture(t_pars *p, char *line);
-int					ft_pars(int fd, t_pars *p);
+int					clean_num(char *line, int id, int **res);
 int					ft_clean_map(char **map, int nbr_line);
-int					ft_check_parsing(t_pars *p, int fd);
-int					aff_error(int error);
-int					check_char_map(char c);
+int					check_char_map(char **map, int nbr_line);
 void				ft_swap(int *color);
+int					ft_isspace(char c);
 
 #endif

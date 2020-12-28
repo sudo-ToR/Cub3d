@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:40:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/04/21 12:15:10 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/27 21:06:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	get_initial_position(char *v, t_pars p, t_pos_fl *pl)
 				*v = p.map[i][j];
 				pl->x = (double)j + 0.5;
 				pl->y = (double)i + 0.5;
-				p.map[i][j] = '0';
 			}
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/11/29 18:24:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 15:43:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,10 @@ void	loop_win(t_mlx *m)
 
 int		ft_init_mlx(t_mlx *m)
 {
-	char	v;
-
 	set_color(m);
-	get_initial_position(&v, m->p, &m->pl);
-	init_dir_vector(v, &m->cam_angle);
+	get_initial_position(&(m->p.start_dir), m->p, &m->pl);
+	m->p.map[(int)m->pl.y][(int)m->pl.x] = '0';
+	init_dir_vector(m->p.start_dir, &m->cam_angle);
 	if (!(m->distance.distance = malloc(sizeof(double) * m->p.r[0])))
 		return (1);
 	m->distance.i = 0;

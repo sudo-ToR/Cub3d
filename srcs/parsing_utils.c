@@ -6,11 +6,19 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 17:50:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/16 11:30:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/27 21:41:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
+
+int			ft_isspace(char c)
+{
+	if (c == '\f' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == ' ')
+		return (1);
+	return (0);
+}
 
 int			is_texture(char *line)
 {
@@ -47,9 +55,10 @@ int			check_char_map(char **map, int nbr_line)
 		{
 			if ((map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2'
 				&& map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W'
-					&& map[i][j] != 'E') || b > 1)
+					&& map[i][j] != 'E' && !(ft_isspace(map[i][j]))) || b > 1)
 				return (1);
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
 				b += 1;
 			j++;
 		}

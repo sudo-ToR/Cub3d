@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/13 18:18:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/27 22:39:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			main(int ac, char **av)
 		return (ft_printf("Missing argument\n"));
 	if (check_argument(av[1]))
 		return (ft_printf(("First argument must be a .cub file\n")));
-	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p))
+	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p, &m))
 		return (1);
 	if (ft_init_mlx(&m))
 	{

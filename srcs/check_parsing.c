@@ -6,53 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/16 20:12:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/28 15:56:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
-
-void	cut_space(char ***map, int nbr_line)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i > nbr_line)
-	{
-		j = 0;
-		while ((*map)[i][j]) 
-		{
-			if ((*map)[i][j] == ' ' || (*map)[i][j] == '\t' || (*map)[i][j] == '\r'
-				|| (*map)[i][j] == '\v' || (*map)[i][j] == '\f')
-				(*map)[i][j] = '0';
-			j++;
-		}
-
-		i++;
-	}
-}
-
-int		check_map_border(char **map, int nbr_line, int length)
-{
-	int i;
-
-	i = 0;
-	while (i < nbr_line - 1 && map[i][length - 1])
-	{
-		if (map[i][0] != '1' || map[i][length - 1] != '1')
-			return (WRONG_MAP);
-		i++;
-	}
-	i = 0;
-	while (i < length)
-	{
-		if (map[0][i] != '1' || map[nbr_line - 1][i] != '1')
-			return (WRONG_MAP);
-		i += 2;
-	}
-	return (cut_space(&map, nbr_line));
-}
+#include "../includes/cub3d.h"
 
 int		length_map(char **map, int nbr_line)
 {
@@ -71,55 +30,89 @@ int		length_map(char **map, int nbr_line)
 	return (len_map);
 }
 
-int		check_map(char **map, int nbr_line, int len_map)
+void	flood_fill(char **map, int x, int y, t_mlx *m)
 {
-	if (check_char_map(map, nbr_line))
+	map[y][x] = '1';
+	if (!map[y][x + 1] || !map[y + 1] || x - 1 < 0 || y - 1 < 0 ||
+			(int)ft_strlen(map[y + 1]) < x || (int)ft_strlen(map[y - 1]) < x ||
+			ft_isspace(map[y][x + 1]) || ft_isspace(map[y][x - 1]) ||
+			ft_isspace(map[y + 1][x]) || ft_isspace(map[y + 1][x]))
+	{
+		aff_error(WRONG_MAP, m);
+	}
+	if (map[y][x + 1] != '1')
+		flood_fill(map, x + 1, y, m);
+	if (map[y][x - 1] != '1')
+		flood_fill(map, x - 1, y, m);
+	if (map[y + 1][x] != '1')
+		flood_fill(map, x, y + 1, m);
+	if (map[y - 1][x] != '1')
+		flood_fill(map, x, y - 1, m);
+}
+
+int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
+{
+	t_pos_fl	tmp;
+	char		**map_tmp;
+	int			i;
+
+	i = -1;
+	if (!(map_tmp = malloc(sizeof(char *) * (nbr_line + 1))))
+		return (1);
+	while (++i < nbr_line)
+		map_tmp[i] = ft_strdup(p->map[i]);
+	map_tmp[i] = NULL;
+	if (check_char_map(map_tmp, nbr_line))
 		return (WRONG_MAP);
-	len_map = length_map(map, nbr_line);
-	cut_space(&map, nbr_line);
+	get_initial_position(&(p->start_dir), *p, &tmp);
+	flood_fill(map_tmp, tmp.x, tmp.y, m);
+	len_map = length_map(p->map, nbr_line);
+	free_table(map_tmp);
 	return (0);
 }
 
-int		ft_check_parsing(t_pars *p, int fd)
+int		ft_check_parsing(t_pars *p, int fd, t_mlx *m)
 {
 	if (p->r[0] > WIDTH_MAX)
 		p->r[0] = WIDTH_MAX;
 	if (p->r[1] > HEIGHT_MAX)
 		p->r[1] = HEIGHT_MAX;
 	if (fd == -1)
-		return (aff_error(WRONG_PATH_CUB_FILE));
+		return (aff_error(WRONG_PATH_CUB_FILE, m));
 	else if (!p->no || !p->so || !p->ea || !p->s || !p->we)
-		return (aff_error(WRONG_TEXTURE));
+		return (aff_error(WRONG_TEXTURE, m));
 	else if (!p->r || p->r[0] <= 0 || p->r[1] <= 0)
-		return (aff_error(WRONG_RESOLUTION));
+		return (aff_error(WRONG_RESOLUTION, m));
 	else if (!p->c || p->c[0] < 0 || p->c[1] < 0 || p->c[2] < 0)
-		return (aff_error(WRONG_C));
+		return (aff_error(WRONG_C, m));
 	else if (!p->f || p->f[0] < 0 || p->f[1] < 0 || p->f[2] < 0)
-		return (aff_error(WRONG_F));
-	else if (!p->map || (check_map(p->map, p->height, &p->width)))
-		return (aff_error(WRONG_MAP));
+		return (aff_error(WRONG_F, m));
+	else if (!p->map || (check_map(p, p->height, p->width, m)))
+		return (aff_error(WRONG_MAP, m));
 	p->width = ft_strlen(p->map[0]);
 	return (0);
 }
 
-int		aff_error(int error)
+int		aff_error(int error, t_mlx *m)
 {
-	ft_printf("Invalide cub file : ");
+	ft_printf("Error\n");
 	if (error == WRONG_PATH_CUB_FILE)
-		return (ft_printf("wrong path for cub file\n"));
+		ft_printf("wrong path for cub file\n");
 	else if (error == WRONG_ARG)
-		return (ft_printf("wrong argument in cub file\n"));
+		ft_printf("wrong argument in cub file\n");
 	else if (error == WRONG_TEXTURE)
-		return (ft_printf("wrong texture in cub file\n"));
+		ft_printf("wrong texture in cub file\n");
 	else if (error == WRONG_RESOLUTION)
-		return (ft_printf("incorrect resolution\n"));
+		ft_printf("incorrect resolution\n");
 	else if (error == WRONG_C)
-		return (ft_printf("incorrect ceiling color\n"));
+		ft_printf("incorrect ceiling color\n");
 	else if (error == WRONG_F)
-		return (ft_printf("incorrect floor color\n"));
+		ft_printf("incorrect floor color\n");
 	else if (error == WRONG_MAP)
-		return (ft_printf("invalid map\n"));
+		ft_printf("invalid map\n");
 	else if (error == DUPLICATION_ARGUMENT)
-		return (ft_printf("duplication of an argument\n"));
+		ft_printf("duplication of an argument\n");
+	if (error != SUCCESS)
+		return (exit_game(m, 1));
 	return (0);
 }
