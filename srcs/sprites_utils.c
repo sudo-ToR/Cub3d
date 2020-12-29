@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:09:08 by user42            #+#    #+#             */
-/*   Updated: 2020/12/29 21:07:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:33:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ void		find_map_width(t_pars *p)
 	while (p->map[++i])
 		p->width = ((int)ft_strlen(p->map[i]) > p->width) ?
 			ft_strlen(p->map[i]) : p->width;
+}
+
+int			empty_line_parsing(char *line, t_pars *p, t_mlx *m)
+{
+	free(line);
+	if (p->map)
+		return (aff_error(WRONG_MAP, m));
+	return (0);
 }

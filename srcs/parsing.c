@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 17:34:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:34:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,7 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (!line[0])
-			free(line);
-		else if (ft_isnum(line))
+		if (ft_isnum(line))
 		{
 			if (ft_pars_num(line, p))
 				return (aff_error(ft_pars_num(line, p), m));
@@ -123,6 +121,8 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 			if (get_texture(p, line, m))
 				return (1);
 		}
+		else if (!ft_strlen(line))
+			empty_line_parsing(line, p, m);
 		else if (ft_isdigit(line[0]) || ft_isspace(line[0]))
 			ft_realloc(&p->height, &p->map, line);
 		else
