@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 17:43:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:05:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		ft_check_parsing(t_pars *p, int fd, t_mlx *m)
 		return (aff_error(WRONG_F, m));
 	else if (!p->map || (check_map(p, p->height, p->width, m)))
 		return (aff_error(WRONG_MAP, m));
-	p->width = ft_strlen(p->map[0]);
+	find_map_width(p);
 	return (0);
 }
 

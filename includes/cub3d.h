@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 16:38:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:05:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ int				error_dupplication_text(char *line, char **text, t_mlx *m);
 int				ft_pars_num(char *line, t_pars *p);
 void			ft_pars_utils_map(int ret, char *line, t_pars *p);
 int				ft_isnum(char *line);
+void			find_map_width(t_pars *p);
 #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:43:35 by user42            #+#    #+#             */
-/*   Updated: 2020/12/28 16:08:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 20:56:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	free_struct(t_mlx *m)
 	free(m->p.so);
 	free(m->p.we);
 	free(m->p.s);
+	free(m->p.c);
+	free(m->p.f);
 	free_table(m->p.map);
 	free(m->distance.distance);
 }

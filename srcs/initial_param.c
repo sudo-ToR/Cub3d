@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 11:40:17 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/27 21:06:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:00:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	set_color(t_mlx *m)
 	m->colors.floor[0] = (m->p.f[0] & 0xff);
 	m->colors.floor[1] = (m->p.f[1] & 0xff);
 	m->colors.floor[2] = (m->p.f[2] & 0xff);
-	free(m->p.f);
 	m->colors.ceil[0] = (m->p.c[0] & 0xff);
 	m->colors.ceil[1] = (m->p.c[1] & 0xff);
 	m->colors.ceil[2] = (m->p.c[2] & 0xff);
-	free(m->p.c);
 }

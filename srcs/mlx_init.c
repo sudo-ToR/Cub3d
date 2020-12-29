@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 17:48:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 20:49:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int		key_press(int keycode, void *param)
 	coeff = tan(m->cam_angle);
 	if (keycode == M)
 		m->aff_minimap = (m->aff_minimap) ? 0 : 1;
-	if (keycode == ARR_RIGHT)
+	if (keycode == D)
 		m->cam_angle += 0.1;
-	if (keycode == ARR_LEFT)
+	if (keycode == A)
 		m->cam_angle -= 0.1;
 	if (keycode == W || keycode == ARR_UP)
 		move((t_pos_fl) {0.1, -0.1}, m, M_PI_2);
 	if (keycode == S || keycode == ARR_DOWN)
 		move((t_pos_fl) {-0.1, 0.1}, m, M_PI_2);
-	if (keycode == D)
+	if (keycode == ARR_RIGHT)
 		move((t_pos_fl) {-0.1, 0.1}, m, 0.);
-	if (keycode == A)
+	if (keycode == ARR_LEFT)
 		move((t_pos_fl) {0.1, -0.1}, m, 0.);
 	if (keycode == ESC || keycode == Q)
 		exit_game(m, 0);
