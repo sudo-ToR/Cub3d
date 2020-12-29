@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 17:57:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:43:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
 	int			i;
 
 	i = -1;
+	if (check_char_map(p->map, nbr_line))
+		return (WRONG_MAP);
 	if (!(map_tmp = malloc(sizeof(char *) * (nbr_line + 1))))
 		return (1);
 	while (++i < nbr_line)
 		map_tmp[i] = ft_strdup(p->map[i]);
 	map_tmp[i] = NULL;
-	if (check_char_map(map_tmp, nbr_line))
-		return (WRONG_MAP);
 	get_initial_position(&(p->start_dir), *p, &tmp);
 	flood_fill(map_tmp, tmp.x, tmp.y, m);
 	len_map = length_map(p->map, nbr_line);

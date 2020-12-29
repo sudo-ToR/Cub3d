@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 16:37:58 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:34:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_realloc(int *nbr_line, char ***map, char *line)
 	char	**tmp;
 	int		i;
 
-	if (!(tmp = malloc(sizeof(char *) * (*nbr_line + 1))))
+	if (!(tmp = malloc(sizeof(char *) * (*nbr_line + 2))))
 		return ;
 	i = 0;
 	while (i < *nbr_line)
@@ -27,6 +27,7 @@ void		ft_realloc(int *nbr_line, char ***map, char *line)
 		i++;
 	}
 	tmp[*nbr_line] = line;
+	tmp[*nbr_line + 1] = NULL;
 	free(*map);
 	(*nbr_line)++;
 	*map = tmp;
@@ -82,7 +83,7 @@ int			clean_num(char *line, int id, int **res)
 	}
 	else
 		*res = NULL;
-	free_table(stock);
+	free_clean_num(stock, line);
 	if (res && id == 1)
 		ft_swap(*res);
 	return (0);
@@ -122,7 +123,7 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 			if (get_texture(p, line, m))
 				return (1);
 		}
-		else if (line)
+		else if (ft_isdigit(line[0]) || ft_isspace(line[0]))
 			ft_realloc(&p->height, &p->map, line);
 		else
 			aff_error(WRONG_ARG, m);

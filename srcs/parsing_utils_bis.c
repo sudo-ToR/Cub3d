@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:36:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/29 12:40:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:46:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ void		cut_space(t_pars *p)
 				p->map[i][j] = '1';
 		}
 	}
+}
+
+void		free_clean_num(char **stock, char *line)
+{
+	free_table(stock);
+	free(line);
 }

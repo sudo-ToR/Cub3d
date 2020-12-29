@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/27 22:39:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:46:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 int			check_argument(char *name_file)
 {
 	int length;
+	int	fd;
 
+	fd = open(name_file, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		ft_printf("Error\nunexistant file\n");
+		return (1);
+	}
 	if ((length = ft_strlen(name_file)) < 4)
 		return (1);
 	if (ft_strncmp(name_file + (length - 4), ".cub", 4))

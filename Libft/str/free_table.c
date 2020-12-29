@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 17:42:17 by user42            #+#    #+#             */
-/*   Updated: 2020/12/28 15:55:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:24:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		free_table(char **to_free)
 	int i;
 
 	i = 0;
-	if (to_free)
+	if (!to_free)
 		return ;
 	while (to_free[i])
 	{

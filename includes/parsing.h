@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/28 17:57:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:29:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void				ft_swap(int *color);
 int					ft_isspace(char c);
 void				ft_realloc(int *nbr_line, char ***map, char *line);
 void				cut_space(t_pars *p);
+void				free_clean_num(char ** stock, char *line);
 
 #endif
