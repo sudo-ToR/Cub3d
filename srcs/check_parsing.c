@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 22:02:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 15:07:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
 	while (++i < nbr_line)
 		map_tmp[i] = ft_strdup(p->map[i]);
 	map_tmp[i] = NULL;
+	find_map_width(p);
 	get_initial_position(&(p->start_dir), *p, &tmp);
 	flood_fill(map_tmp, tmp.x, tmp.y, m);
 	len_map = length_map(p->map, nbr_line);
@@ -96,7 +97,6 @@ int		ft_check_parsing(t_pars *p, int fd, t_mlx *m)
 		return (aff_error(WRONG_F, m));
 	else if (!p->map || (check_map(p, p->height, p->width, m)))
 		return (aff_error(WRONG_MAP, m));
-	find_map_width(p);
 	return (0);
 }
 
