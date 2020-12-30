@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:36:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/30 16:14:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 16:57:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ int			ft_pars_num(char *line, t_pars *p)
 
 	if (!ft_strncmp(line, "R ", 2) && !p->map)
 	{
-		if ((ret = clean_num(line, 0, &p->r) == 1))
+		if ((ret = clean_num(line, 0, &p->r)) == 1)
 			return (DUPLICATION_ARGUMENT);
 		else if (ret == 2)
 			return (WRONG_RESOLUTION);
 	}
 	else if (!ft_strncmp(line, "F ", 2) && !p->map)
 	{
-		if ((ret = clean_num(line, 1, &p->f) == 1))
+		if ((ret = clean_num(line, 1, &p->f)) == 1)
 			return (DUPLICATION_ARGUMENT);
 		else if (ret == 2)
 			return (WRONG_F);
 	}
 	else if (!ft_strncmp(line, "C ", 2) && !p->map)
 	{
-		if ((ret = clean_num(line, 1, &p->c) == 1))
+		if ((ret = clean_num(line, 1, &p->c)) == 1)
 			return (DUPLICATION_ARGUMENT);
 		if (ret == 2)
 			return (WRONG_C);
