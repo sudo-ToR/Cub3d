@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 16:06:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 16:09:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 	{
 		if (ft_isnum(line))
 		{
-			if (ft_pars_num(line, p))
-				return (aff_error(ft_pars_num(line, p), m));
+			if ((ret = ft_pars_num(line, p)))
+				return (aff_error(ret, m));
 		}
 		else if ((is_texture(line)) && !(p->map))
 		{
