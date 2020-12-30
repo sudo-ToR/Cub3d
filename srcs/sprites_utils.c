@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:09:08 by user42            #+#    #+#             */
-/*   Updated: 2020/12/30 15:01:07 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 16:03:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		square_map(t_pars *p)
 			tmp = ft_calloc(sizeof(char), (p->width + 1));
 			ft_strlcpy(tmp, p->map[i], len + 1);
 			free(p->map[i]);
-			while (len < p->width + 1)
+			while (len < p->width)
 			{
 				tmp[len] = '1';
 				len++;

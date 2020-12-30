@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:42:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/30 15:27:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 16:04:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			count_arg(char *line, int id)
 			count++;
 		while (line[i] && ft_isdigit(line[i]))
 			i++;
-		i++;
 	}
 	if ((id == 0 && count == 2) || (id == 1 && count == 3))
 		return (0);
