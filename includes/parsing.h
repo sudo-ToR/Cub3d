@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 15:05:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 17:10:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void				square_map(t_pars *p);
 int					count_arg(char *line, int id);
 int					check_clean_num(int **res, int id, char *line);
 int					is_map(char *line);
+void				clean_num_moulinette(char **texture);
 #endif
