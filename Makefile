@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/16 12:12:45 by lnoirot           #+#    #+#              #
-#    Updated: 2020/12/28 16:39:23 by user42           ###   ########.fr        #
+#    Updated: 2020/12/30 12:44:44 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRC_LIST =	main.c \
 			sprites_utils.c \
 			screenshot.c \
 			utils.c \
-			parsing_utils_bis.c
+			parsing_utils_bis.c \
+			utils_bis.c
 SRCS =		$(addprefix $(SRCS_PATH), $(SRC_LIST))
 OBJS	=	$(addprefix $(OBJ_PATH), $(SRC_LIST:.c=.o))
 

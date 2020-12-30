@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 10:18:22 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 20:49:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 12:47:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	loop_win(t_mlx *m)
 {
 	m->win_ptr = mlx_new_window(m->mlx_ptr, m->p.r[0], m->p.r[1], "Cub3D");
 	mlx_hook(m->win_ptr, X11_KEY_PRESS, X11_KEY_PRESS_M, key_press, m);
-	mlx_hook(m->win_ptr, 17, 0, exit_game, m);
+	mlx_hook(m->win_ptr, 17, 1L << 17, exit_game, m);
 	mlx_loop_hook(m->mlx_ptr, game_loop, m);
 	mlx_loop(m->mlx_ptr);
 }

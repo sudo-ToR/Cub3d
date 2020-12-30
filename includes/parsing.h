@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 21:35:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 12:52:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,7 @@ int					ft_isspace(char c);
 void				ft_realloc(int *nbr_line, char ***map, char *line);
 void				cut_space(t_pars *p);
 void				free_clean_num(char **stock, char *line);
+void				square_map(t_pars *p);
+int					count_arg(char *line, int id);
+int					check_clean_num(int **res, int id, char *line);
 #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:09:08 by user42            #+#    #+#             */
-/*   Updated: 2020/12/29 21:33:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 12:45:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,29 @@ int			empty_line_parsing(char *line, t_pars *p, t_mlx *m)
 	if (p->map)
 		return (aff_error(WRONG_MAP, m));
 	return (0);
+}
+
+void		square_map(t_pars *p)
+{
+	int		i;
+	char	*tmp;
+	int		len;
+
+	i = -1;
+	while (p->map[++i])
+	{
+		len = ft_strlen(p->map[i]);
+		if (len < p->width)
+		{
+			tmp = ft_calloc(sizeof(char), (p->width + 1));
+			ft_strlcpy(tmp, p->map[i], len);
+			free(p->map[i]);
+			while (len < p->width + 1)
+			{
+				tmp[len] = '1';
+				len++;
+			}
+			p->map[i] = tmp;
+		}
+	}
 }

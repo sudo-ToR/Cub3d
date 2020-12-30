@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 21:34:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 12:53:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int			clean_num(char *line, int id, int **res)
 	int		i;
 	int		j;
 
-	if (*res != NULL)
-		return (1);
+	if (check_clean_num(res, id, line))
+		return (check_clean_num(res, id, line));
 	i = 0;
 	j = -1;
 	stock = (id == 0) ? ft_split(line, " \f\t\n\r\v")

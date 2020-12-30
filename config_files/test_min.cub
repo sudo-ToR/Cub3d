@@ -4,7 +4,7 @@ SO config_files/texture_stones.xpm
 WE config_files/wood.xpm
 EA config_files/texture_stones.xpm
 S config_files/barrel.xpm
-F 125,125,0
+F 125,125,125
 C 0,0,255
 
 111111111111

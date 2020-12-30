@@ -4,11 +4,11 @@ SO config_files/texture_stones.xpm
 WE config_files/wood.xpm
 EA config_files/white_wall.xpm
 S config_files/barrel.xpm
-F 125,125,0
+F 0,0,125
 
 
 
-C 24,187,200
+C 0,0,125
 1
    1111111111111111111111111
    1000000000110000000000001
