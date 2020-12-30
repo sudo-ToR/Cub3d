@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 17:10:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 18:04:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int			clean_texture(char *line, char **texture)
 		if (i == 1)
 			*texture = ft_strdup(res[i]);
 		else if (i > 1)
-			clean_num_moulinette(texture);
+			*texture = NULL;
 		free(res[i]);
 		i++;
 	}
 	free(res);
 	if ((fd = open(*texture, O_RDONLY)) == -1)
-		*texture = NULL;
+		clean_num_moulinette(texture);
 	close(fd);
 	return (0);
 }

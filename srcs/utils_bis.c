@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:42:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/30 17:09:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 18:04:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void		wrong_arg(char *line, t_mlx *m)
 
 void		clean_num_moulinette(char **texture)
 {
-	free(texture);
+	free(*texture);
 	*texture = NULL;
 }
