@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 09:54:28 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 21:34:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 15:26:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void			ft_pars_utils_map(int ret, char *line, t_pars *p);
 int				ft_isnum(char *line);
 void			find_map_width(t_pars *p);
 int				empty_line_parsing(char *line, t_pars *p, t_mlx *m);
+void			wrong_arg(char *line, t_mlx *m);
 #endif

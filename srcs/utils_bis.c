@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:42:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/30 15:10:39 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 15:27:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,10 @@ int			is_map(char *line)
 	if (line[i] && ft_isdigit(line[i]))
 		return (1);
 	return (0);
+}
+
+void		wrong_arg(char *line, t_mlx *m)
+{
+	free(line);
+	aff_error(WRONG_ARG, m);
 }

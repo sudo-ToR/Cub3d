@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 15:08:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/30 15:27:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,7 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 		else if (is_map(line))
 			ft_realloc(&p->height, &p->map, line);
 		else
-		{
-			aff_error(WRONG_ARG, m);
-			free(line);
-		}
+			wrong_arg(line, m);
 	}
 	ft_pars_utils_map(ret, line, p);
 	return ((ret == -1) ? -1 : ft_check_parsing(p, fd, m));
