@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnoirot <lnoirot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 17:08:54 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/02/09 16:47:36 by lnoirot          ###   ########.fr       */
+/*   Updated: 2021/01/02 21:32:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int				get_next_line(int fd, char **line)
 	static unsigned int		i = 0;
 	static char				buff[BUFFER_SIZE];
 
-	if (BUFFER_SIZE == 0)
+	if (BUFFER_SIZE == 0 || fd < 0)
 		return (-1);
 	*line = ft_strdup_line("", BUFFER_SIZE - 1);
 	if (i == BUFFER_SIZE || fd == 0)

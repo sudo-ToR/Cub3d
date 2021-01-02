@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:32:27 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 17:10:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/02 21:34:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum		e_parsing_error
 	WRONG_C,
 	WRONG_F,
 	WRONG_MAP,
-	DUPLICATION_ARGUMENT
+	DUPLICATION_ARGUMENT,
+	WRONG_FILE
 }					t_parsing_error;
 
 int					clean_texture(char *line, char **texture);

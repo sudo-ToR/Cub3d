@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/29 17:46:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/02 21:54:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int			main(int ac, char **av)
 
 	ft_memset(&m, 0, sizeof(m));
 	if (ac == 1)
-		return (ft_printf("Missing argument\n"));
+		return (ft_printf("Error\nMissing argument\n"));
 	if (check_argument(av[1]))
-		return (ft_printf(("First argument must be a .cub file\n")));
+		return (ft_printf(("Error\nFirst argument must be a .cub file\n")));
 	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p, &m))
 		return (1);
 	if (ft_init_mlx(&m))
 	{
-		ft_printf("Wrong format of textures\n");
+		ft_printf("Error\nWrong format of textures\n");
 		exit_game(&m, 1);
 	}
 	if (ac >= 3 && !ft_strcmp(av[2], "--save"))

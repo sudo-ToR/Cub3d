@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 15:16:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/02 21:56:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,20 @@ int		check_map(t_pars *p, int nbr_line, int len_map, t_mlx *m)
 	return (0);
 }
 
-int		ft_check_parsing(t_pars *p, int fd, t_mlx *m)
+int		ft_check_parsing(t_pars *p, t_mlx *m)
 {
 	int		x;
 	int		y;
 
 	m->mlx_ptr = mlx_init();
 	mlx_get_screen_size(m->mlx_ptr, &x, &y);
-	if (p->r[0] > x)
+	if (!p->r && !p->f && !p->c && !p->no && !p->so
+		&& !p->ea && !p->s && !p->we && !p->map)
+		return (aff_error(WRONG_FILE, m));
+	if (p->r && p->r[0] > x)
 		p->r[0] = x;
-	if (p->r[1] > y)
+	if (p->r && p->r[1] > y)
 		p->r[1] = y;
-	if (fd == -1)
-		return (aff_error(WRONG_PATH_CUB_FILE, m));
 	else if (!p->no || !p->so || !p->ea || !p->s || !p->we)
 		return (aff_error(WRONG_TEXTURE, m));
 	else if (!p->r || p->r[0] <= 0 || p->r[1] <= 0)
@@ -119,6 +120,8 @@ int		aff_error(int error, t_mlx *m)
 		ft_printf("invalid map\n");
 	else if (error == DUPLICATION_ARGUMENT)
 		ft_printf("duplication of an argument\n");
+	else if (error == WRONG_FILE)
+		ft_printf("empty file\n");
 	if (error != SUCCESS)
 		return (exit_game(m, 1));
 	return (0);

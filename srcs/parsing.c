@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:01:08 by lnoirot           #+#    #+#             */
-/*   Updated: 2020/12/30 18:04:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/02 21:53:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,5 @@ int			ft_pars(int fd, t_pars *p, t_mlx *m)
 			wrong_arg(line, m);
 	}
 	ft_pars_utils_map(ret, line, p);
-	return ((ret == -1) ? -1 : ft_check_parsing(p, fd, m));
+	return ((ret == -1) ? -1 : ft_check_parsing(p, m));
 }
