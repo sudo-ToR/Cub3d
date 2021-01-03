@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2021/01/02 21:56:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/03 20:21:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int		aff_error(int error, t_mlx *m)
 		ft_printf("duplication of an argument\n");
 	else if (error == WRONG_FILE)
 		ft_printf("empty file\n");
+	else if (error == NOT_A_FILE)
+		ft_printf("not a file\n");
 	if (error != SUCCESS)
 		return (exit_game(m, 1));
 	return (0);

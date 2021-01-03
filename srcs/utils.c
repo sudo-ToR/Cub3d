@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:43:35 by user42            #+#    #+#             */
-/*   Updated: 2021/01/02 22:07:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/03 20:23:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_struct(t_mlx *m)
 	free_table(m->p.map);
 	free(m->distance.distance);
 	ft_lstclear(&m->sprites, free);
-
 }
 
 int		check_img_add(void *img)
