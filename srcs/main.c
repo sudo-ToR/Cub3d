@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:23:42 by lnoirot           #+#    #+#             */
-/*   Updated: 2021/01/02 21:54:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/03 20:49:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int			check_argument(char *name_file)
+char		*check_argument(char *name_file)
 {
 	int length;
 	int	fd;
@@ -21,26 +21,26 @@ int			check_argument(char *name_file)
 	if (fd < 0)
 	{
 		close(fd);
-		ft_printf("Error\nunexistant file\n");
-		return (1);
+		return ("Error\nunexistant file\n");
 	}
 	if ((length = ft_strlen(name_file)) < 4)
-		return (1);
+		return ("Error\nFirst argument must be a .cub file\n");
 	if (ft_strncmp(name_file + (length - 4), ".cub", 4))
-		return (1);
-	return (0);
+		return ("Error\nFirst argument must be a .cub file\n");
+	return (NULL);
 }
 
 int			main(int ac, char **av)
 {
 	int		fd;
 	t_mlx	m;
+	char	*str;
 
 	ft_memset(&m, 0, sizeof(m));
 	if (ac == 1)
 		return (ft_printf("Error\nMissing argument\n"));
-	if (check_argument(av[1]))
-		return (ft_printf(("Error\nFirst argument must be a .cub file\n")));
+	if ((str = check_argument(av[1])))
+		return (ft_printf("%s", str));
 	if (ft_pars(fd = open(av[1], O_RDONLY), &m.p, &m))
 		return (1);
 	if (ft_init_mlx(&m))
