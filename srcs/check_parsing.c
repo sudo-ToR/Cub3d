@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:18 by lnoirot           #+#    #+#             */
-/*   Updated: 2021/01/03 20:21:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/04 16:39:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	flood_fill(char **map, int x, int y, t_mlx *m)
 	if (!map[y][x + 1] || !map[y + 1] || x - 1 < 0 || y - 1 < 0 ||
 			(int)ft_strlen(map[y + 1]) < x || (int)ft_strlen(map[y - 1]) < x ||
 			ft_isspace(map[y][x + 1]) || ft_isspace(map[y][x - 1]) ||
-			ft_isspace(map[y + 1][x]) || ft_isspace(map[y + 1][x]))
+			ft_isspace(map[y + 1][x]) || ft_isspace(map[y - 1][x]))
 	{
 		aff_error(WRONG_MAP, m);
 	}
